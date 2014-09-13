@@ -1,0 +1,17 @@
+[
+{
+"modid": "PoorOres",
+"name": "PoorOres",
+"description": "This mod adds poor ores to worldgen.",
+"version": "0.0.1",
+"credits": "",
+"logoFile": "",
+"mcversion": "1.7.10",
+"url": "",
+"updateUrl": "",
+"authorList": [ "Xexanos" ],
+"parent": "",
+"screenshots": [],
+"dependencies": [ "mod_MinecraftForge" ]
+}
+] 
