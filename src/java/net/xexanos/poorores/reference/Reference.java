@@ -10,5 +10,4 @@ public class Reference {
     public static final String CONFIG_PREFIX = "ores.block_";
 
     public static boolean CONFIG_VANILLA_WORLDGEN = true;
-    public static boolean CONFIG_WORLDGEN = true;
 }

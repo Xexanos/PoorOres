@@ -1,18 +1,17 @@
 package net.xexanos.poorores.handler;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
 import net.xexanos.poorores.reference.Reference;
 
 import java.io.File;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-
 public class configHandler {
-	
-	public static Configuration config;
 
-    public static void init(File configFile){
+    public static Configuration config;
+
+    public static void init(File configFile) {
         config = new Configuration(configFile);
 
         int id = 0;
@@ -24,19 +23,19 @@ public class configHandler {
 
         //read all matching categories and add corresponding block
 
-        if(config.hasChanged()){
+        if (config.hasChanged()) {
             config.save();
         }
     }
-    
+
     @SubscribeEvent
-    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent e){
-    	if (e.modID.equalsIgnoreCase(Reference.MOD_ID)){
-             loadConfig();
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent e) {
+        if (e.modID.equalsIgnoreCase(Reference.MOD_ID)) {
+            loadConfig();
         }
     }
 
-    public void loadConfig(){
+    public void loadConfig() {
 
     }
 }
