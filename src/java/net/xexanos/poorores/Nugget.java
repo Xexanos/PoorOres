@@ -3,7 +3,9 @@ package net.xexanos.poorores;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
 
 public class Nugget extends Item {
@@ -12,6 +14,8 @@ public class Nugget extends Item {
     public Nugget(String unlocalizedName) {
         super();
         this.setUnlocalizedName(unlocalizedName + "_nugget");
+        this.setCreativeTab(CreativeTabs.tabAllSearch);
+        this.setCreativeTab(CreativeTabPoorOres.PO_TAB);
     }
 
     @Override
