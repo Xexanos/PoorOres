@@ -1,5 +1,9 @@
 package net.xexanos.poorores.reference;
 
+import net.xexanos.poorores.Ore;
+
+import java.util.LinkedList;
+
 public class Reference {
     public static final String MOD_ID = "PoorOres";
     public static final String MOD_NAME = "PoorOres";
@@ -8,6 +12,7 @@ public class Reference {
     public static final String SERVER_PROXY_CLASS = "net.xexanos.poorores.proxy.ServerProxy";
     public static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ":";
     public static final String CONFIG_PREFIX = "ores.block_";
+    public static final LinkedList<Ore> ORES_LIST = new LinkedList<Ore>();
 
     public static boolean CONFIG_VANILLA_WORLDGEN = true;
 }

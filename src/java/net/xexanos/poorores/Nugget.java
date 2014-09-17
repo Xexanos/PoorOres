@@ -15,7 +15,7 @@ public class Nugget extends Item {
         super();
         this.setUnlocalizedName(unlocalizedName + "_nugget");
         this.setCreativeTab(CreativeTabs.tabAllSearch);
-        this.setCreativeTab(CreativeTabPoorOres.PO_TAB);
+        this.setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
     }
 
     @Override
