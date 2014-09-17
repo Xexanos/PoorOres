@@ -1,21 +1,46 @@
 package net.xexanos.poorores;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
 
 public class Nugget extends Item {
     private Item ingot;
+    private String name;
 
-    public Nugget(String unlocalizedName) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Item getIngot() {
+        return ingot;
+    }
+
+    public void setIngot(Item ingot) {
+        this.ingot = ingot;
+    }
+
+    public Nugget(String unlocalizedName, Block baseBlock) {
         super();
-        this.setUnlocalizedName(unlocalizedName + "_nugget");
+        this.setName(unlocalizedName + "_nugget");
+        this.setUnlocalizedName(this.getName());
+        this.setIngot(FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(baseBlock)).getItem());
         this.setCreativeTab(CreativeTabs.tabAllSearch);
         this.setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
+
+        GameRegistry.addRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', new ItemStack(this));
     }
 
     @Override

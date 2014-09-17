@@ -2,11 +2,12 @@ package net.xexanos.poorores.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.xexanos.poorores.Nugget;
+import net.xexanos.poorores.reference.Reference;
 
 public class Items {
-    public static final Nugget IRON_NUGGET = new Nugget("iron");
-
     public static void init() {
-        GameRegistry.registerItem(IRON_NUGGET, "iron_nugget");
+        for (Nugget nugget : Reference.NUGGETS_LIST) {
+            GameRegistry.registerItem(nugget, nugget.getName());
+        }
     }
 }

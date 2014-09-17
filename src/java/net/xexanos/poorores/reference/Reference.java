@@ -1,5 +1,6 @@
 package net.xexanos.poorores.reference;
 
+import net.xexanos.poorores.Nugget;
 import net.xexanos.poorores.Ore;
 
 import java.util.LinkedList;
@@ -13,6 +14,7 @@ public class Reference {
     public static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ":";
     public static final String CONFIG_PREFIX = "ores.block_";
     public static final LinkedList<Ore> ORES_LIST = new LinkedList<Ore>();
+    public static final LinkedList<Nugget> NUGGETS_LIST =new LinkedList<Nugget>();
 
     public static boolean CONFIG_VANILLA_WORLDGEN = true;
 }
