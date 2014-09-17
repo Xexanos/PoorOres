@@ -19,8 +19,7 @@ public class configHandler {
         //read worldgen config
         Reference.CONFIG_VANILLA_WORLDGEN = config.getBoolean("vanilla_worldgen", "worldgen", true, "Enable/Disable worldgen for vanilla Ores");
 
-        //load all vanilla ores
-        Reference.ORES_LIST.add(new Ore("coal", Block.getBlockFromName("minecraft:coal_ore"), Block.getBlockFromName("minecraft:stone"), 3));
+/*        Reference.ORES_LIST.add(new Ore("coal", Block.getBlockFromName("minecraft:coal_ore"), Block.getBlockFromName("minecraft:stone"), 3));
         Reference.ORES_LIST.add(new Ore("diamond", Block.getBlockFromName("minecraft:diamond_ore"), Block.getBlockFromName("minecraft:stone"), 3));
         Reference.ORES_LIST.add(new Ore("emerald", Block.getBlockFromName("minecraft:emerald_ore"), Block.getBlockFromName("minecraft:stone"), 3));
         Reference.ORES_LIST.add(new Ore("gold", Block.getBlockFromName("minecraft:gold_ore"), Block.getBlockFromName("minecraft:stone"), 3));
@@ -28,7 +27,8 @@ public class configHandler {
         Reference.ORES_LIST.add(new Ore("lapis", Block.getBlockFromName("minecraft:lapis_ore"), Block.getBlockFromName("minecraft:stone"), 3));
         Reference.ORES_LIST.add(new Ore("redstone", Block.getBlockFromName("minecraft:redstone_ore"), Block.getBlockFromName("minecraft:stone"), 3));
         Reference.ORES_LIST.add(new Ore("quartz", Block.getBlockFromName("minecraft:quartz_ore"), Block.getBlockFromName("minecraft:netherrack"), 3));
-
+*/
+        //load all vanilla ores
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {
