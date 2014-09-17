@@ -13,7 +13,7 @@ public class Nugget extends Item {
 
     @Override
     public Item setUnlocalizedName(String unlocalizedName) {
-        super.setUnlocalizedName(Reference.MOD_ID.toLowerCase() + ":" + unlocalizedName);
+        super.setUnlocalizedName(Reference.RESOURCE_PREFIX + unlocalizedName);
         return this;
     }
 

@@ -10,7 +10,7 @@ import net.xexanos.poorores.init.Items;
 import net.xexanos.poorores.proxy.IProyx;
 import net.xexanos.poorores.reference.Reference;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY_CLASS)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class PoorOresMod {
 
     @Mod.Instance(Reference.MOD_ID)
