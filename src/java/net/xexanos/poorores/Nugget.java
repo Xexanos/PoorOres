@@ -13,8 +13,17 @@ import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
 
 public class Nugget extends Item {
-    private Item ingot;
     private String name;
+    private Block baseBlock;
+    private Ore ore;
+
+    public Ore getOre() {
+        return ore;
+    }
+
+    public void setOre(Ore ore) {
+        this.ore = ore;
+    }
 
     public String getName() {
         return name;
@@ -25,22 +34,26 @@ public class Nugget extends Item {
     }
 
     public Item getIngot() {
-        return ingot;
+        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(baseBlock)).getItem();
     }
 
-    public void setIngot(Item ingot) {
-        this.ingot = ingot;
+    public void setBaseBlock(Block baseBlock) {
+        this.baseBlock = baseBlock;
     }
 
-    public Nugget(String unlocalizedName, Block baseBlock) {
+    public Nugget(String unlocalizedName, Block baseBlock, Ore ore) {
         super();
         this.setName(unlocalizedName + "_nugget");
         this.setUnlocalizedName(this.getName());
-        this.setIngot(FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(baseBlock)).getItem());
+        this.setBaseBlock(baseBlock);
+        this.setOre(ore);
         this.setCreativeTab(CreativeTabs.tabAllSearch);
         this.setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
+    }
 
+    public void registerRS() {
         GameRegistry.addRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', new ItemStack(this));
+        GameRegistry.addSmelting(this.getOre(), new ItemStack(this), 0.1f);
     }
 
     @Override

@@ -5,6 +5,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 import net.xexanos.poorores.handler.configHandler;
 import net.xexanos.poorores.init.Blocks;
 import net.xexanos.poorores.init.Items;
@@ -32,12 +34,13 @@ public class PoorOresMod {
     public void init(FMLInitializationEvent e) {
         configHandler.init(configName);
 
-        Items.init();
         Blocks.init();
+        Items.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         Blocks.postInit();
+        Items.postInit();
     }
 }

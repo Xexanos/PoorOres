@@ -3,6 +3,7 @@ package net.xexanos.poorores.handler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.xexanos.poorores.Nugget;
@@ -39,10 +40,7 @@ public class configHandler {
 
                             Ore poorOre = new Ore(name, baseBlock, underlyingBlock, hardness);
                             Reference.ORES_LIST.add(poorOre);
-                            Nugget nugget = new Nugget(name, baseBlock);
-                            Reference.NUGGETS_LIST.add(nugget);
-                            //GameRegistry.addSmelting(poorOre, new ItemStack(nugget), 0.1f);
-
+                            Reference.NUGGETS_LIST.add(new Nugget(name, baseBlock, poorOre));
                         } else {
                             LogHelper.warn("Underlying Block \"" + underlyingBlockName + "\" not found.");
                             LogHelper.warn("Ore will not be added.");

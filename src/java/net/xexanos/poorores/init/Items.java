@@ -10,4 +10,10 @@ public class Items {
             GameRegistry.registerItem(nugget, nugget.getName());
         }
     }
+
+    public static void postInit() {
+        for (Nugget nugget : Reference.NUGGETS_LIST) {
+            nugget.registerRS();
+        }
+    }
 }
