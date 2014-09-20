@@ -9,6 +9,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
 
@@ -16,6 +18,15 @@ public class Nugget extends Item {
     private String name;
     private Block baseBlock;
     private Ore ore;
+    private String oreDictName;
+
+    public String getOreDictName() {
+        return oreDictName;
+    }
+
+    public void setOreDictName(String oreDictName) {
+        this.oreDictName = oreDictName;
+    }
 
     public Ore getOre() {
         return ore;
@@ -41,19 +52,26 @@ public class Nugget extends Item {
         this.baseBlock = baseBlock;
     }
 
-    public Nugget(String unlocalizedName, Block baseBlock, Ore ore) {
+    public Nugget(String name, Block baseBlock, Ore ore) {
         super();
-        this.setName(unlocalizedName + "_nugget");
+        this.setName(name + "_nugget");
         this.setUnlocalizedName(this.getName());
         this.setBaseBlock(baseBlock);
         this.setOre(ore);
+        this.setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         this.setCreativeTab(CreativeTabs.tabAllSearch);
         this.setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
+        OreDictionary.registerOre(this.getOreDictName(), this);
     }
 
     public void registerRS() {
-        GameRegistry.addRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', new ItemStack(this));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', this.getOreDictName()));
+//        GameRegistry.addRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', new ItemStack(this));
         GameRegistry.addSmelting(this.getOre(), new ItemStack(this), 0.1f);
+    }
+
+    public void registerOreDict() {
+        OreDictionary.registerOre(this.getOreDictName(), this);
     }
 
     @Override
