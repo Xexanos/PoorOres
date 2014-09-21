@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -14,19 +15,24 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
+import net.xexanos.poorores.textures.NuggetTexture;
+import net.xexanos.poorores.textures.PoorOreTexture;
+import net.xexanos.poorores.utility.LogHelper;
 
 public class Nugget extends Item {
     private String name;
     private PoorOre poorOre;
+    private String baseMod;
     private String oreDictName;
     private int meta;
     private int nuggetRenderType;
 
-    public Nugget(String name, PoorOre poorOre, int meta, int nuggetRenderType) {
+    public Nugget(String name, PoorOre poorOre, String baseMod, int meta, int nuggetRenderType) {
         super();
         setName(name + "_nugget");
         setUnlocalizedName(this.getName());
         setPoorOre(poorOre);
+        setBaseMod(baseMod);
         setMeta(meta);
         setNuggetRenderType(nuggetRenderType);
         setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
@@ -49,6 +55,14 @@ public class Nugget extends Item {
 
     public void setPoorOre(PoorOre poorOre) {
         this.poorOre = poorOre;
+    }
+
+    public String getBaseMod() {
+        return baseMod;
+    }
+
+    public void setBaseMod(String baseMod) {
+        this.baseMod = baseMod;
     }
 
     public String getOreDictName() {
@@ -75,12 +89,12 @@ public class Nugget extends Item {
         this.nuggetRenderType = nuggetRenderType;
     }
 
-    public Item getIngot() {
-        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta())).getItem();
+    public ItemStack getIngot() {
+        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta()));
     }
 
     public void registerRS() {
-        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', this.getOreDictName()));
+        GameRegistry.addRecipe(new ShapedOreRecipe(this.getIngot(), "nnn","nnn","nnn",'n', this.getOreDictName()));
         GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
     }
 
@@ -97,6 +111,23 @@ public class Nugget extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1));
+//        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1));
+
+        if (iconRegister instanceof TextureMap) {
+            TextureMap map = (TextureMap) iconRegister;
+
+            String name = Reference.MOD_ID.toLowerCase() + ":" + getName();
+
+            //load texture from file or generate from baseBlock
+            TextureAtlasSprite texture = map.getTextureExtry(name);
+            if (texture == null) {
+                texture = new NuggetTexture(this);
+                if (!map.setTextureEntry(name, texture)) {
+                    LogHelper.error("Could not add texture for " + name + " after creation");
+                }
+            }
+
+            itemIcon = map.getTextureExtry(name);
+        }
     }
 }

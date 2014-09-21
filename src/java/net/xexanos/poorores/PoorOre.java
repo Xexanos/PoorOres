@@ -121,11 +121,10 @@ public class PoorOre extends Block {
     {
         return getBaseBlock().getHarvestTool(metadata);
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-//        blockIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1));
-
         if (iconRegister instanceof TextureMap) {
             TextureMap map = (TextureMap) iconRegister;
 

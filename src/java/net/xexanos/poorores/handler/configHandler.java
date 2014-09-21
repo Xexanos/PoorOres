@@ -40,7 +40,7 @@ public class configHandler {
                             int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
                             PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType);
                             Reference.ORES_LIST.add(poorOre);
-                            Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, baseBlockMeta, nuggetRenderType));
+                            Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, modID, baseBlockMeta, nuggetRenderType));
                         } else {
                             LogHelper.warn("Underlying Block \"" + underlyingBlockName + "\" not found.");
                             LogHelper.warn("Ore will not be added.");

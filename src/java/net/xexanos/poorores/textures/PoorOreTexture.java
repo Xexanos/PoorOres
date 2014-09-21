@@ -12,14 +12,11 @@ import net.xexanos.poorores.utility.LogHelper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 public class PoorOreTexture extends TextureAtlasSprite {
     private PoorOre poorOre;
-    public BufferedImage output_image = null;
 
     public PoorOreTexture(PoorOre poorOre) {
         super(Reference.MOD_ID.toLowerCase() + ":poor_" + poorOre.getName() + "_ore");
@@ -96,7 +93,7 @@ public class PoorOreTexture extends TextureAtlasSprite {
 
         int h = ore_image[0].getHeight();
 
-        output_image = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage output_image = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
 
         int[] ore_data = new int[w * w];
         int[] underlying_data = new int[w * w];
