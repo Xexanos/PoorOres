@@ -16,6 +16,7 @@ import net.xexanos.poorores.utility.LogHelper;
 
 import java.io.FileNotFoundException;
 
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class PoorOre extends Block {
@@ -109,18 +110,17 @@ public class PoorOre extends Block {
         OreDictionary.registerOre(getOreDictName(), this);
     }
 
-    public void setHarvestLevel() {
-        setHarvestLevel("pickaxe", min(getBaseHarvestLevel(), 0));
+    @Override
+    public int getHarvestLevel(int metadata)
+    {
+        return getBaseBlock().getHarvestLevel(metadata);
     }
 
-    private int getBaseHarvestLevel() {
-        int i = 0;
-        while (i < 16 && getBaseBlock().getHarvestLevel(i) == -1) {
-            i++;
-        }
-        return (i < 16) ? i : 2;
+    @Override
+    public String getHarvestTool(int metadata)
+    {
+        return getBaseBlock().getHarvestTool(metadata);
     }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {

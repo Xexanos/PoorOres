@@ -14,7 +14,6 @@ public class Blocks {
     public static void init() {
         for (PoorOre poorOre : Reference.ORES_LIST) {
             poorOre.registerOreDict();
-            poorOre.setHarvestLevel();
         }
     }
 }
