@@ -1,14 +1,12 @@
 package net.xexanos.poorores.handler;
 
 import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.xexanos.poorores.Nugget;
-import net.xexanos.poorores.Ore;
+import net.xexanos.poorores.PoorOre;
 import net.xexanos.poorores.reference.Reference;
+import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
 import java.io.File;
@@ -33,14 +31,16 @@ public class configHandler {
                     int baseBlockMeta = config.get(category, "baseBlockMeta", 0).getInt();
                     Block baseBlock = Block.getBlockFromName(modID + ":" + baseBlockName);
                     if (baseBlock != null) {
+                        String baseBlockTexture = config.get(category, "baseBlockTexture", modID + ":" + baseBlockName).getString();
                         String underlyingBlockName = config.get(category, "underlyingBlock", "minecraft:stone").getString();
                         Block underlyingBlock = Block.getBlockFromName(underlyingBlockName);
                         if (underlyingBlock != null) {
                             int hardness = config.get(category, "hardness", 3).getInt();
-
-                            Ore poorOre = new Ore(name, baseBlock, underlyingBlock, hardness);
+                            int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
+                            int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
+                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType);
                             Reference.ORES_LIST.add(poorOre);
-                            Reference.NUGGETS_LIST.add(new Nugget(name, baseBlock, poorOre));
+                            Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, baseBlockMeta, nuggetRenderType));
                         } else {
                             LogHelper.warn("Underlying Block \"" + underlyingBlockName + "\" not found.");
                             LogHelper.warn("Ore will not be added.");

@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,24 +17,22 @@ import net.xexanos.poorores.reference.Reference;
 
 public class Nugget extends Item {
     private String name;
-    private Block baseBlock;
-    private Ore ore;
+    private PoorOre poorOre;
     private String oreDictName;
+    private int meta;
+    private int nuggetRenderType;
 
-    public String getOreDictName() {
-        return oreDictName;
-    }
-
-    public void setOreDictName(String oreDictName) {
-        this.oreDictName = oreDictName;
-    }
-
-    public Ore getOre() {
-        return ore;
-    }
-
-    public void setOre(Ore ore) {
-        this.ore = ore;
+    public Nugget(String name, PoorOre poorOre, int meta, int nuggetRenderType) {
+        super();
+        setName(name + "_nugget");
+        setUnlocalizedName(this.getName());
+        setPoorOre(poorOre);
+        setMeta(meta);
+        setNuggetRenderType(nuggetRenderType);
+        setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
+        setCreativeTab(CreativeTabs.tabAllSearch);
+        setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
+        OreDictionary.registerOre(this.getOreDictName(), this);
     }
 
     public String getName() {
@@ -44,34 +43,49 @@ public class Nugget extends Item {
         this.name = name;
     }
 
+    public PoorOre getPoorOre() {
+        return poorOre;
+    }
+
+    public void setPoorOre(PoorOre poorOre) {
+        this.poorOre = poorOre;
+    }
+
+    public String getOreDictName() {
+        return oreDictName;
+    }
+
+    public void setOreDictName(String oreDictName) {
+        this.oreDictName = oreDictName;
+    }
+
+    public int getMeta() {
+        return meta;
+    }
+
+    public void setMeta(int meta) {
+        this.meta = meta;
+    }
+
+    public int getNuggetRenderType() {
+        return nuggetRenderType;
+    }
+
+    public void setNuggetRenderType(int nuggetRenderType) {
+        this.nuggetRenderType = nuggetRenderType;
+    }
+
     public Item getIngot() {
-        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(baseBlock)).getItem();
-    }
-
-    public void setBaseBlock(Block baseBlock) {
-        this.baseBlock = baseBlock;
-    }
-
-    public Nugget(String name, Block baseBlock, Ore ore) {
-        super();
-        this.setName(name + "_nugget");
-        this.setUnlocalizedName(this.getName());
-        this.setBaseBlock(baseBlock);
-        this.setOre(ore);
-        this.setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
-        this.setCreativeTab(CreativeTabs.tabAllSearch);
-        this.setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
-        OreDictionary.registerOre(this.getOreDictName(), this);
+        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta())).getItem();
     }
 
     public void registerRS() {
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', this.getOreDictName()));
-//        GameRegistry.addRecipe(new ItemStack(this.getIngot()), "nnn","nnn","nnn",'n', new ItemStack(this));
-        GameRegistry.addSmelting(this.getOre(), new ItemStack(this), 0.1f);
+        GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
     }
 
     public void registerOreDict() {
-        OreDictionary.registerOre(this.getOreDictName(), this);
+        OreDictionary.registerOre(getOreDictName(), this);
     }
 
     @Override
@@ -83,6 +97,6 @@ public class Nugget extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1));
     }
 }

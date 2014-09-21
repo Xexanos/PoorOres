@@ -1,20 +1,20 @@
 package net.xexanos.poorores.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.xexanos.poorores.Ore;
+import net.xexanos.poorores.PoorOre;
 import net.xexanos.poorores.reference.Reference;
 
 public class Blocks {
     public static void preInit() {
-        for (Ore ore : Reference.ORES_LIST) {
-            GameRegistry.registerBlock(ore, "poor_" + ore.getName() + "_ore");
+        for (PoorOre poorOre : Reference.ORES_LIST) {
+            GameRegistry.registerBlock(poorOre, "poor_" + poorOre.getName() + "_ore");
         }
     }
 
     public static void init() {
-        for (Ore ore : Reference.ORES_LIST) {
-            ore.registerOreDict();
-            ore.setHarvestLevel();
+        for (PoorOre poorOre : Reference.ORES_LIST) {
+            poorOre.registerOreDict();
+            poorOre.setHarvestLevel();
         }
     }
 }
