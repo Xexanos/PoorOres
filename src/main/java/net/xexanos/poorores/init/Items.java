@@ -14,7 +14,7 @@ public class Items {
     public static void init() {
         for (Nugget nugget : Reference.NUGGETS_LIST) {
             nugget.registerOreDict();
-            nugget.registerRS();
+            nugget.registerRecipes();
         }
     }
 }

@@ -3,7 +3,6 @@ package net.xexanos.poorores;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -16,7 +15,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.textures.NuggetTexture;
-import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
 public class Nugget extends Item {
@@ -34,11 +32,10 @@ public class Nugget extends Item {
         setPoorOre(poorOre);
         setBaseMod(baseMod);
         setMeta(meta);
+        setOreDictName("nugget" + Character.toString(getName().charAt(0)).toUpperCase() + getName().substring(1));
         setNuggetRenderType(nuggetRenderType);
-        setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setCreativeTab(CreativeTabs.tabAllSearch);
         setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
-        OreDictionary.registerOre(this.getOreDictName(), this);
     }
 
     public String getName() {
@@ -93,13 +90,19 @@ public class Nugget extends Item {
         return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta()));
     }
 
-    public void registerRS() {
-        GameRegistry.addRecipe(new ShapedOreRecipe(this.getIngot(), "nnn","nnn","nnn",'n', this.getOreDictName()));
-        GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
+    public void registerRecipes() {
+        if (Reference.CONFIG_ADD_CRAFTING) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(this.getIngot(), "nnn","nnn","nnn",'n', this.getOreDictName()));
+            GameRegistry.addShapelessRecipe(new ItemStack(this, 9), this.getIngot().getItem());
+        }
+        if (Reference.CONFIG_ADD_SMELTING) {
+            GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
+        }
     }
 
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
+        OreDictionary.registerOre("nuggetAll", this);
     }
 
     @Override
@@ -111,8 +114,6 @@ public class Nugget extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-//        itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(getUnlocalizedName().indexOf(".") + 1));
-
         if (iconRegister instanceof TextureMap) {
             TextureMap map = (TextureMap) iconRegister;
 

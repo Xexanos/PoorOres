@@ -17,4 +17,6 @@ public class Reference {
     public static final LinkedList<Nugget> NUGGETS_LIST =new LinkedList<Nugget>();
 
     public static boolean CONFIG_VANILLA_WORLDGEN = true;
+    public static boolean CONFIG_ADD_CRAFTING = true;
+    public static boolean CONFIG_ADD_SMELTING = true;
 }

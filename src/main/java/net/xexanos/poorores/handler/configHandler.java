@@ -6,7 +6,6 @@ import net.minecraftforge.common.config.Configuration;
 import net.xexanos.poorores.Nugget;
 import net.xexanos.poorores.PoorOre;
 import net.xexanos.poorores.reference.Reference;
-import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
 import java.io.File;
@@ -19,7 +18,9 @@ public class configHandler {
         config = new Configuration(configFile);
 
         //read worldgen config
-        Reference.CONFIG_VANILLA_WORLDGEN = config.getBoolean("vanilla_worldgen", "worldgen", true, "Enable/Disable worldgen for vanilla Ores");
+        Reference.CONFIG_VANILLA_WORLDGEN = config.getBoolean("vanilla_worldgen", config.CATEGORY_GENERAL, true, "Enable/Disable worldgen for vanilla Ores");
+        Reference.CONFIG_ADD_CRAFTING = config.getBoolean("add_crafting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for crafting");
+        Reference.CONFIG_ADD_SMELTING = config.getBoolean("add_smelting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for smelting");
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {

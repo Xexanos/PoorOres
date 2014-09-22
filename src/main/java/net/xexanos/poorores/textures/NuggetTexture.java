@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.xexanos.poorores.Nugget;
 import net.xexanos.poorores.reference.Reference;
@@ -13,7 +12,6 @@ import net.xexanos.poorores.utility.LogHelper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class NuggetTexture extends TextureAtlasSprite {

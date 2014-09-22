@@ -14,8 +14,6 @@ import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
-import java.io.FileNotFoundException;
-
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -108,6 +106,7 @@ public class PoorOre extends Block {
 
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
+        OreDictionary.registerOre("poorOreAll", this);
     }
 
     @Override
