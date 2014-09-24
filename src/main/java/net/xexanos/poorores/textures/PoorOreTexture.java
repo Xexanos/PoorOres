@@ -12,6 +12,7 @@ import net.xexanos.poorores.utility.LogHelper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -120,6 +121,14 @@ public class PoorOreTexture extends TextureAtlasSprite {
 
         // replace the old texture
         ore_image[0] = output_image;
+
+/*
+        try {
+            ImageIO.write(output_image, "png", new File(poorOre.getName() + "_" + (poorOre.getOreRenderType()) + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
 
         // load the texture
         this.loadSprite(ore_image, animation, (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);

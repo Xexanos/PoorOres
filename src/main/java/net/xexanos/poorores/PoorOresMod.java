@@ -5,11 +5,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.xexanos.poorores.handler.configHandler;
 import net.xexanos.poorores.init.Blocks;
 import net.xexanos.poorores.init.Items;
 import net.xexanos.poorores.proxy.IProyx;
 import net.xexanos.poorores.reference.Reference;
+import net.xexanos.poorores.worldgen.Generator;
 
 import java.io.File;
 
@@ -37,6 +39,7 @@ public class PoorOresMod {
     public void init(FMLInitializationEvent e) {
         Blocks.init();
         Items.init();
+        GameRegistry.registerWorldGenerator(new Generator(), 16);
     }
 
     @Mod.EventHandler

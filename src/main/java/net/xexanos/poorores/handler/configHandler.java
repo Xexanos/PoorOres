@@ -9,6 +9,8 @@ import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.utility.LogHelper;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 public class configHandler {
 
@@ -39,23 +41,51 @@ public class configHandler {
                             int hardness = config.get(category, "hardness", 3).getInt();
                             int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
                             int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
-                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType);
+                            int veinRate = config.get(category, "veinRate", 0).getInt();
+                            int veinSize = config.get(category, "veinSize", 0).getInt();
+                            int veinHeight = config.get(category, "veinHeight", 0).getInt();
+                            String dimWhiteListStr = config.get(category, "dimWhiteList", "").getString();
+                            LinkedList<Integer> dimWhiteList = new LinkedList<Integer>();
+                            if (dimWhiteListStr.equals("")) {
+                                String[] dimWhiteListStrArray = dimWhiteListStr.split(",");
+                                for (String entry : dimWhiteListStrArray) {
+                                    try {
+                                        dimWhiteList.add(Integer.parseInt(entry));
+                                    } catch (NumberFormatException e) {
+                                        LogHelper.error(name + ": could not parse " + entry + " to an integer");
+                                    }
+                                }
+                            }
+                            String dimBlackListStr = config.get(category, "dimBlackList", "").getString();
+                                List<Integer> dimBlackList = new LinkedList<Integer>();
+                            if (dimBlackListStr.equals("")) {
+                                String[] dimBlackListStrArray = dimBlackListStr.split(",");
+                                for (String entry : dimBlackListStrArray) {
+                                    try {
+                                        dimBlackList.add(Integer.parseInt(entry));
+                                    } catch (NumberFormatException e) {
+                                        LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
+                                        LogHelper.warn(name + ": Entry will be ignored.");
+                                    }
+                                }
+                            }
+                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
                             Reference.ORES_LIST.add(poorOre);
                             Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, modID, baseBlockMeta, nuggetRenderType));
                         } else {
-                            LogHelper.warn("Underlying Block \"" + underlyingBlockName + "\" not found.");
-                            LogHelper.warn("Ore will not be added.");
+                            LogHelper.warn(name + ": Underlying Block \"" + underlyingBlockName + "\" not found.");
+                            LogHelper.warn(name + ": Ore will not be added.");
                         }
 
                     } else {
-                        LogHelper.warn("Baseblock \"" + modID + ":" + baseBlockName + "\" not found.");
-                        LogHelper.warn("Ore will not be added.");
+                        LogHelper.warn(name + ": Baseblock \"" + modID + ":" + baseBlockName + "\" not found.");
+                        LogHelper.warn(name + ": Ore will not be added.");
                     }
 
 
                 } else {
-                    LogHelper.warn("Corresponding mod \"" + modID + "\" for " + Reference.CONFIG_PREFIX + name + " is missing.");
-                    LogHelper.warn("Ore will not be added.");
+                    LogHelper.warn(name + ": Corresponding mod \"" + modID + "\" is missing.");
+                    LogHelper.warn(name + ": Ore will not be added.");
                 }
             }
         }

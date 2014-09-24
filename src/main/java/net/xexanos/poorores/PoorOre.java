@@ -14,11 +14,15 @@ import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import java.util.List;
 
 public class PoorOre extends Block {
     private String name;
+    private int veinRate;
+    private int veinSize;
+    private int veinHeight;
+    private List<Integer> dimWhiteList;
+    private List<Integer> dimBlackList;
     private Block baseBlock;
     private String baseBlockTexture;
     private Block underlyingBlock;
@@ -26,10 +30,15 @@ public class PoorOre extends Block {
     private String oreDictName;
     private int oreRenderType;
 
-    public PoorOre(String name, Block baseBlock, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int hardness, int oreRenderType) {
+    public PoorOre(String name, Block baseBlock, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int hardness, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
         super(Material.rock);
         setBlockName("poor_" + name + "_ore");
         setName(name);
+        setVeinRate(veinRate);
+        setVeinSize(veinSize);
+        setVeinHeight(veinHeight);
+        setDimWhiteList(dimWhiteList);
+        setDimBlackList(dimBlackList);
         setBaseBlock(baseBlock);
         setBaseBlockTexture(baseBlockTexture);
         setUnderlyingBlock(underlyingBlock);
@@ -62,6 +71,46 @@ public class PoorOre extends Block {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getVeinRate() {
+        return veinRate;
+    }
+
+    public void setVeinRate(int veinRate) {
+        this.veinRate = veinRate;
+    }
+
+    public int getVeinSize() {
+        return veinSize;
+    }
+
+    public void setVeinSize(int veinSize) {
+        this.veinSize = veinSize;
+    }
+
+    public int getVeinHeight() {
+        return veinHeight;
+    }
+
+    public void setVeinHeight(int veinHeight) {
+        this.veinHeight = veinHeight;
+    }
+
+    public List<Integer> getDimWhiteList() {
+        return dimWhiteList;
+    }
+
+    public void setDimWhiteList(List<Integer> dimWhiteList) {
+        this.dimWhiteList = dimWhiteList;
+    }
+
+    public List<Integer> getDimBlackList() {
+        return dimBlackList;
+    }
+
+    public void setDimBlackList(List<Integer> dimBlackList) {
+        this.dimBlackList = dimBlackList;
     }
 
     public Block getBaseBlock() {
@@ -110,6 +159,11 @@ public class PoorOre extends Block {
     }
 
     @Override
+    public String getLocalizedName() {
+        return ("poor " + getBaseBlock().getLocalizedName());
+    }
+
+    @Override
     public int getHarvestLevel(int metadata)
     {
         return getBaseBlock().getHarvestLevel(metadata);
@@ -134,7 +188,7 @@ public class PoorOre extends Block {
             if (texture == null) {
                 texture = new PoorOreTexture(this);
                 if (!map.setTextureEntry(name, texture)) {
-                    LogHelper.error("Could not add texture for " + name + " after creation");
+                    LogHelper.error(getName() + ": Could not add texture after creation");
                 }
             }
 
