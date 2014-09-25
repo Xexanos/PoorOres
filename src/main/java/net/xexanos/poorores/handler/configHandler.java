@@ -46,19 +46,20 @@ public class configHandler {
                             int veinHeight = config.get(category, "veinHeight", 0).getInt();
                             String dimWhiteListStr = config.get(category, "dimWhiteList", "").getString();
                             LinkedList<Integer> dimWhiteList = new LinkedList<Integer>();
-                            if (dimWhiteListStr.equals("")) {
+                            if (dimWhiteListStr.length() == 0) {
                                 String[] dimWhiteListStrArray = dimWhiteListStr.split(",");
                                 for (String entry : dimWhiteListStrArray) {
                                     try {
                                         dimWhiteList.add(Integer.parseInt(entry));
                                     } catch (NumberFormatException e) {
-                                        LogHelper.error(name + ": could not parse " + entry + " to an integer");
+                                        LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
+                                        LogHelper.warn(name + ": Entry will be ignored.");
                                     }
                                 }
                             }
                             String dimBlackListStr = config.get(category, "dimBlackList", "").getString();
-                                List<Integer> dimBlackList = new LinkedList<Integer>();
-                            if (dimBlackListStr.equals("")) {
+                            List<Integer> dimBlackList = new LinkedList<Integer>();
+                            if (dimBlackListStr.length() == 0) {
                                 String[] dimBlackListStrArray = dimBlackListStr.split(",");
                                 for (String entry : dimBlackListStrArray) {
                                     try {
