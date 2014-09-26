@@ -6,7 +6,9 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.MinecraftForge;
 import net.xexanos.poorores.handler.configHandler;
+import net.xexanos.poorores.handler.eventHandler;
 import net.xexanos.poorores.init.Blocks;
 import net.xexanos.poorores.init.Items;
 import net.xexanos.poorores.proxy.IProyx;
@@ -37,6 +39,7 @@ public class PoorOresMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
+        MinecraftForge.ORE_GEN_BUS.register(new eventHandler());
         Blocks.init();
         Items.init();
         GameRegistry.registerWorldGenerator(new Generator(), 16);

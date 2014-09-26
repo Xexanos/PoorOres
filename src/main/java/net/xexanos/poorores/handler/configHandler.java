@@ -20,9 +20,37 @@ public class configHandler {
         config = new Configuration(configFile);
 
         //read worldgen config
-        Reference.CONFIG_VANILLA_WORLDGEN = config.getBoolean("vanilla_worldgen", config.CATEGORY_GENERAL, true, "Enable/Disable worldgen for vanilla Ores");
+        Reference.CONFIG_WORLDGEN_COAL = config.getBoolean("baseWorldgenCoal", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for coal");
+        Reference.CONFIG_WORLDGEN_DIAMOND = config.getBoolean("baseWorldgenDiamond", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for diamond");
+        Reference.CONFIG_WORLDGEN_EMERALD = config.getBoolean("baseWorldgenEmerald", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for emerald");
+        Reference.CONFIG_WORLDGEN_GOLD = config.getBoolean("baseWorldgenGold", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for gold");
+        Reference.CONFIG_WORLDGEN_IRON = config.getBoolean("baseWorldgenIron", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for iron");
+        Reference.CONFIG_WORLDGEN_LAPIS = config.getBoolean("baseWorldgenLapis", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for lapis");
+        Reference.CONFIG_WORLDGEN_REDSTONE = config.getBoolean("baseWorldgenRedstone", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for redstone");
+        Reference.CONFIG_WORLDGEN_QUARTZ = config.getBoolean("baseWorldgenQuartz", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for quartz");
         Reference.CONFIG_ADD_CRAFTING = config.getBoolean("add_crafting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for crafting");
         Reference.CONFIG_ADD_SMELTING = config.getBoolean("add_smelting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for smelting");
+
+        //adding vanilla ores
+        config.get(Reference.CONFIG_PREFIX + "coal", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "coal", "baseBlock", "coal_ore");
+        config.get(Reference.CONFIG_PREFIX + "diamond", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "diamond", "baseBlock", "diamond_ore");
+        config.get(Reference.CONFIG_PREFIX + "emerald", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "emerald", "baseBlock", "emerald_ore");
+        config.get(Reference.CONFIG_PREFIX + "emerald", "oreRenderType", 1);
+        config.get(Reference.CONFIG_PREFIX + "gold", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "gold", "baseBlock", "gold_ore");
+        config.get(Reference.CONFIG_PREFIX + "iron", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "iron", "baseBlock", "iron_ore");
+        config.get(Reference.CONFIG_PREFIX + "lapis", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "lapis", "baseBlock", "lapis_ore");
+        config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
+        config.get(Reference.CONFIG_PREFIX + "quartz", "modID", "minecraft");
+        config.get(Reference.CONFIG_PREFIX + "quartz", "baseBlock", "quartz_ore");
+        config.get(Reference.CONFIG_PREFIX + "quartz", "underlyingBlock", "minecraft:netherrack");
+        config.get(Reference.CONFIG_PREFIX + "quartz", "oreRenderType", 2);
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {
@@ -46,7 +74,7 @@ public class configHandler {
                             int veinHeight = config.get(category, "veinHeight", 0).getInt();
                             String dimWhiteListStr = config.get(category, "dimWhiteList", "").getString();
                             LinkedList<Integer> dimWhiteList = new LinkedList<Integer>();
-                            if (dimWhiteListStr.length() == 0) {
+                            if (dimWhiteListStr.length() != 0) {
                                 String[] dimWhiteListStrArray = dimWhiteListStr.split(",");
                                 for (String entry : dimWhiteListStrArray) {
                                     try {
@@ -59,7 +87,7 @@ public class configHandler {
                             }
                             String dimBlackListStr = config.get(category, "dimBlackList", "").getString();
                             List<Integer> dimBlackList = new LinkedList<Integer>();
-                            if (dimBlackListStr.length() == 0) {
+                            if (dimBlackListStr.length() != 0) {
                                 String[] dimBlackListStrArray = dimBlackListStr.split(",");
                                 for (String entry : dimBlackListStrArray) {
                                     try {
