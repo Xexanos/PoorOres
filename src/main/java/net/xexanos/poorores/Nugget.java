@@ -32,7 +32,7 @@ public class Nugget extends Item {
         setPoorOre(poorOre);
         setBaseMod(baseMod);
         setMeta(meta);
-        setOreDictName("nugget" + Character.toString(getName().charAt(0)).toUpperCase() + getName().substring(1));
+        setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setNuggetRenderType(nuggetRenderType);
         setCreativeTab(CreativeTabs.tabAllSearch);
         setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
@@ -103,12 +103,6 @@ public class Nugget extends Item {
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
         OreDictionary.registerOre("nuggetAll", this);
-    }
-
-    @Override
-    public Item setUnlocalizedName(String unlocalizedName) {
-        super.setUnlocalizedName(Reference.RESOURCE_PREFIX + unlocalizedName);
-        return this;
     }
 
     @Override

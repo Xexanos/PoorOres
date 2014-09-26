@@ -45,6 +45,7 @@ public class PoorOre extends Block {
         setUnderlyingBlockName(underlyingBlockName);
         setHardness(hardness);
         setOreRenderType(oreRenderType);
+        setOreDictName("poorOreAll");
         setOreDictName("poorOre" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setCreativeTab(CreativeTabs.tabBlock);
         setCreativeTab(CreativeTabs.tabAllSearch);
@@ -156,11 +157,6 @@ public class PoorOre extends Block {
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
         OreDictionary.registerOre("poorOreAll", this);
-    }
-
-    @Override
-    public String getLocalizedName() {
-        return ("poor " + getBaseBlock().getLocalizedName());
     }
 
     @Override

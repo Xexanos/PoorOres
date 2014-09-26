@@ -56,7 +56,9 @@ public class NuggetTexture extends TextureAtlasSprite {
         AnimationMetadataSection animation;
 
         try {
-            IResource iResourceIngot = manager.getResource(new ResourceLocation(getNugget().getBaseMod().toLowerCase(), "textures/items/" + getNugget().getIngot().getItem().getIcon(getNugget().getIngot(),0).getIconName() + ".png"));
+            String ingotName = getNugget().getIngot().getItem().getIcon(getNugget().getIngot(),0).getIconName();
+            ingotName = ingotName.substring(ingotName.indexOf(":") + 1);
+            IResource iResourceIngot = manager.getResource(new ResourceLocation(getNugget().getBaseMod().toLowerCase(), "textures/items/" + ingotName + ".png"));
             IResource iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
 
             // load the ore texture

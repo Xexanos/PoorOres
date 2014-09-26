@@ -16,7 +16,6 @@ public class Generator implements IWorldGenerator {
         for (PoorOre poorOre : Reference.ORES_LIST) {
             if (poorOre.getVeinRate() != 0 && poorOre.getVeinHeight() != 0 && poorOre.getVeinSize() != 0 && (poorOre.getDimWhiteList().contains(world.provider.dimensionId) || (poorOre.getDimWhiteList().isEmpty() && !poorOre.getDimBlackList().contains(world.provider.dimensionId)))) {
                 for (int i = 0; i <= poorOre.getVeinRate(); i++) {
-                    LogHelper.info(poorOre.getVeinHeight());
                     new WorldGenMinable(poorOre, 0, poorOre.getVeinSize(), poorOre.getUnderlyingBlock()).generate(world, random, chunkX * 16  + random.nextInt(16), random.nextInt(poorOre.getVeinHeight()), chunkZ * 16  + random.nextInt(16));
                 }
             }
