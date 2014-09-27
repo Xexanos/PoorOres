@@ -5,6 +5,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.xexanos.poorores.Nugget;
 import net.xexanos.poorores.reference.Reference;
@@ -56,25 +59,31 @@ public class NuggetTexture extends TextureAtlasSprite {
         AnimationMetadataSection animation;
 
         try {
-            String ingotName = getNugget().getIngot().getItem().getIcon(getNugget().getIngot(),0).getIconName();
-            int i = ingotName.indexOf(":");
-            String ingotMod = "minecraft";
-            if (i != -1) {
-                ingotMod = ingotName.substring(0, i);
+            ItemStack ingot = getNugget().getIngot();
+            if (ingot == null) {
+                LogHelper.error("Could not get corresponding ingot for " + getNugget().getName());
+                return true;
+            } else {
+                String ingotName = ingot.getItem().getIcon(ingot, 0).getIconName();
+                int i = ingotName.indexOf(":");
+                String ingotMod = "minecraft";
+                if (i != -1) {
+                    ingotMod = ingotName.substring(0, i);
+                }
+                ingotName = ingotName.substring(i + 1);
+                IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod, "textures/items/" + ingotName + ".png"));
+                IResource iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
+
+                // load the ore texture
+                ingot_image[0] = ImageIO.read(iResourceIngot.getInputStream());
+
+                // load animation
+                animation = (AnimationMetadataSection) iResourceIngot.getMetadata("animation");
+
+                nugget_image = ImageIO.read(iResourceNugget.getInputStream());
+
+                wi = ingot_image[0].getWidth();
             }
-            ingotName = ingotName.substring(i + 1);
-            IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod, "textures/items/" + ingotName + ".png"));
-            IResource iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
-
-            // load the ore texture
-            ingot_image[0] = ImageIO.read(iResourceIngot.getInputStream());
-
-            // load animation
-            animation = (AnimationMetadataSection) iResourceIngot.getMetadata("animation");
-
-            nugget_image = ImageIO.read(iResourceNugget.getInputStream());
-
-            wi = ingot_image[0].getWidth();
         } catch (IOException e) {
             e.printStackTrace();
             return true;
@@ -90,7 +99,7 @@ public class NuggetTexture extends TextureAtlasSprite {
         int[] ingot_data = new int[wi * wi];
         int[] nugget_data = new int[wn * wn];
 
-        nugget_image.getRGB(0, 0, wi, wi, nugget_data, 0, wi);
+        nugget_image.getRGB(0, 0, wn, wn, nugget_data, 0, wn);
 
         for (int y = 0; y < h; y += wn) {
             ingot_image[0].getRGB(0, y / wn * wi, wi, wi, ingot_data, 0, wi);
@@ -120,13 +129,6 @@ public class NuggetTexture extends TextureAtlasSprite {
                 }
             }
 
-/*
-            for (int ih = 0; ih < w * w; ih += w) {
-                for (int iw = 0; iw < w; iw++) {
-                    new_data[ih + iw] = 0xff000000 + ((int) (ingot_data[iw + ih] * alpha + underlying_data[iw + ih] * (1 - alpha)) & 0xffffff);
-                }
-            }
-*/
             // write the new image data to the output image buffer
             output_image.setRGB(0, y, wn, wn, new_data, 0, wn);
         }
@@ -145,7 +147,7 @@ public class NuggetTexture extends TextureAtlasSprite {
         // load the texture
         this.loadSprite(ingot_image, animation, (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
 
-        LogHelper.info("Successfully generated texture for \"" + nugget.getUnlocalizedName() + "\". Place \"" + nugget.getName() + ".png\" in the assets folder to override.");
+        LogHelper.info("Successfully generated texture for \"" + nugget.getName() + "\". Place \"" + nugget.getName() + ".png\" in the assets folder to override.");
         return false;
     }
 

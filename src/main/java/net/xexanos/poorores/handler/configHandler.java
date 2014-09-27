@@ -100,7 +100,7 @@ public class configHandler {
                             }
                             PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
                             Reference.ORES_LIST.add(poorOre);
-                            Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, modID, baseBlockMeta, nuggetRenderType));
+                            Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, baseBlockMeta, nuggetRenderType));
                         } else {
                             LogHelper.warn(name + ": Underlying Block \"" + underlyingBlockName + "\" not found.");
                             LogHelper.warn(name + ": Ore will not be added.");

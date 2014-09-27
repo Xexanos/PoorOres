@@ -133,7 +133,7 @@ public class PoorOreTexture extends TextureAtlasSprite {
         // load the texture
         this.loadSprite(ore_image, animation, (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
 
-        LogHelper.info("Successfully generated texture for \"" + poorOre.getLocalizedName() + "\" with background \"" + poorOre.getUnderlyingBlock().getLocalizedName() + "\". Place \"poor_" + poorOre.getName() + "_ore.png\" in the assets folder to override.");
+        LogHelper.info("Successfully generated texture for \"" + poorOre.getName() + "\" with background \"" + poorOre.getUnderlyingBlock().getLocalizedName() + "\". Place \"poor_" + poorOre.getName() + "_ore.png\" in the assets folder to override.");
         return false;
     }
 }

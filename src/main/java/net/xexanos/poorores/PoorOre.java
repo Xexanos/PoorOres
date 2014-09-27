@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;

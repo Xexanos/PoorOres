@@ -21,17 +21,15 @@ import net.xexanos.poorores.utility.LogHelper;
 public class Nugget extends Item {
     private String name;
     private PoorOre poorOre;
-    private String baseMod;
     private String oreDictName;
     private int meta;
     private int nuggetRenderType;
 
-    public Nugget(String name, PoorOre poorOre, String baseMod, int meta, int nuggetRenderType) {
+    public Nugget(String name, PoorOre poorOre, int meta, int nuggetRenderType) {
         super();
         setName(name + "_nugget");
         setUnlocalizedName(this.getName());
         setPoorOre(poorOre);
-        setBaseMod(baseMod);
         setMeta(meta);
         setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setNuggetRenderType(nuggetRenderType);
@@ -53,14 +51,6 @@ public class Nugget extends Item {
 
     public void setPoorOre(PoorOre poorOre) {
         this.poorOre = poorOre;
-    }
-
-    public String getBaseMod() {
-        return baseMod;
-    }
-
-    public void setBaseMod(String baseMod) {
-        this.baseMod = baseMod;
     }
 
     public String getOreDictName() {
@@ -94,7 +84,7 @@ public class Nugget extends Item {
     public void registerRecipes() {
         if (Reference.CONFIG_ADD_CRAFTING) {
             GameRegistry.addRecipe(new ShapedOreRecipe(this.getIngot(), "nnn","nnn","nnn",'n', this.getOreDictName()));
-            GameRegistry.addShapelessRecipe(new ItemStack(this, 9), this.getIngot().getItem());
+            GameRegistry.addShapelessRecipe(new ItemStack(this, 9), this.getIngot());
         }
         if (Reference.CONFIG_ADD_SMELTING) {
             GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
@@ -104,14 +94,6 @@ public class Nugget extends Item {
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
         OreDictionary.registerOre("nuggetAll", this);
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack nugget) {
-        String material = poorOre.getName();
-        material = Character.toString(material.charAt(0)).toUpperCase() + material.substring(1);
-        String prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
-        return prefix.replaceFirst("NUGGETNAME", material);
     }
 
     @Override

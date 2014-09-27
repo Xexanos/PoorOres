@@ -31,14 +31,14 @@ public class PoorOresMod {
     public void preInit(FMLPreInitializationEvent e) {
         configName = e.getSuggestedConfigurationFile();
 
-        configHandler.init(configName);
-
         Blocks.preInit();
         Items.preInit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
+        configHandler.init(configName);
+
         MinecraftForge.ORE_GEN_BUS.register(new eventHandler());
         Blocks.init();
         Items.init();
@@ -47,5 +47,7 @@ public class PoorOresMod {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
+        Blocks.postInit();
+        Items.postInit();
     }
 }
