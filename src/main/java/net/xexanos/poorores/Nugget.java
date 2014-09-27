@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
@@ -103,6 +104,14 @@ public class Nugget extends Item {
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
         OreDictionary.registerOre("nuggetAll", this);
+    }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack nugget) {
+        String material = poorOre.getName();
+        material = Character.toString(material.charAt(0)).toUpperCase() + material.substring(1);
+        String prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
+        return prefix.replaceFirst("NUGGETNAME", material);
     }
 
     @Override

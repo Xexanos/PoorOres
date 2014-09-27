@@ -1,6 +1,4 @@
-itemGroup.poorores=PoorOres
+itemGroup.poorores=Poor Ores
 
 poorores.prefix=Poor ORENAME
-nuggets.prefix=NUGGETNAME Nugget
-
-item.poorores:iron_nugget.name=Iron Nugget
+poorores.nuggets.prefix=NUGGETNAME Nugget

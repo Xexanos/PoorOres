@@ -57,8 +57,13 @@ public class NuggetTexture extends TextureAtlasSprite {
 
         try {
             String ingotName = getNugget().getIngot().getItem().getIcon(getNugget().getIngot(),0).getIconName();
-            ingotName = ingotName.substring(ingotName.indexOf(":") + 1);
-            IResource iResourceIngot = manager.getResource(new ResourceLocation(getNugget().getBaseMod().toLowerCase(), "textures/items/" + ingotName + ".png"));
+            int i = ingotName.indexOf(":");
+            String ingotMod = "minecraft";
+            if (i != -1) {
+                ingotMod = ingotName.substring(0, i);
+            }
+            ingotName = ingotName.substring(i + 1);
+            IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod, "textures/items/" + ingotName + ".png"));
             IResource iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
 
             // load the ore texture
