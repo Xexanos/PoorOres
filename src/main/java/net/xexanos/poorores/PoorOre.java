@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
 import net.xexanos.poorores.reference.Reference;
@@ -31,7 +32,7 @@ public class PoorOre extends Block {
     private String oreDictName;
     private int oreRenderType;
 
-    public PoorOre(String name, Block baseBlock, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int hardness, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
+    public PoorOre(String name, Block baseBlock, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
         super(Material.rock);
         setBlockName("poor_" + name + "_ore");
         setName(name);
@@ -44,7 +45,6 @@ public class PoorOre extends Block {
         setBaseBlockTexture(baseBlockTexture);
         setUnderlyingBlock(underlyingBlock);
         setUnderlyingBlockName(underlyingBlockName);
-        setHardness(hardness);
         setOreRenderType(oreRenderType);
         setOreDictName("orePoorAll");
         setOreDictName("orePoor" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
@@ -153,6 +153,11 @@ public class PoorOre extends Block {
 
     public void setOreRenderType(int oreRenderType) {
         this.oreRenderType = oreRenderType;
+    }
+
+    @Override
+    public float getBlockHardness(World p_149712_1_, int p_149712_2_, int p_149712_3_, int p_149712_4_) {
+        return getBaseBlock().getBlockHardness(p_149712_1_, p_149712_2_, p_149712_3_, p_149712_4_);
     }
 
     public void registerOreDict() {

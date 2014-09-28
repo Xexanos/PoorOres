@@ -2,3 +2,24 @@ itemGroup.poorores=Poor Ores
 
 poorores.prefix=Poor ORENAME
 poorores.nuggets.prefix=NUGGETNAME Nugget
+
+poorores.material.coal=Coal
+poorores.material.diamond=Diamond
+poorores.material.emerald=Emerald
+poorores.material.gold=Gold
+poorores.material.iron=Iron
+poorores.material.lapis=Lapis Lazuli
+poorores.material.redstone=Redstone
+poorores.material.quartz=Nether Quartz
+
+poorores.material.apatite=Apatite
+poorores.material.copper=Copper
+poorores.material.tin=Tin
+
+poorores.material.lead=Lead
+poorores.material.uran=Uran
+
+poorores.material.aluminum=Aluminum
+poorores.material.aluminium=Aluminium
+
+poorores.material.osmium=Osmium

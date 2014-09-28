@@ -97,6 +97,17 @@ public class Nugget extends Item {
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack nugget) {
+        String prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
+        String material = ("" + StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
+        if (material.length() == 0) {
+            return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
+        } else {
+            return prefix.replaceFirst("NUGGETNAME", material);
+        }
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         if (iconRegister instanceof TextureMap) {

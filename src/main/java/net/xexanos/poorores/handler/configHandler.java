@@ -66,7 +66,6 @@ public class configHandler {
                         String underlyingBlockName = config.get(category, "underlyingBlock", "minecraft:stone").getString();
                         Block underlyingBlock = Block.getBlockFromName(underlyingBlockName);
                         if (underlyingBlock != null) {
-                            int hardness = config.get(category, "hardness", 3).getInt();
                             int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
                             int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
                             int veinRate = config.get(category, "veinRate", 0).getInt();
@@ -98,7 +97,7 @@ public class configHandler {
                                     }
                                 }
                             }
-                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, hardness, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
+                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
                             Reference.ORES_LIST.add(poorOre);
                             Reference.NUGGETS_LIST.add(new Nugget(name, poorOre, baseBlockMeta, nuggetRenderType));
                         } else {

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Reference {
     public static final String MOD_ID = "PoorOres";
     public static final String MOD_NAME = "PoorOres";
-    public static final String VERSION = "1.7.10-1.2.3";
+    public static final String VERSION = "1.7.10-1.3.0";
     public static final String CLIENT_PROXY_CLASS = "net.xexanos.poorores.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "net.xexanos.poorores.proxy.ServerProxy";
     public static final String RESOURCE_PREFIX = MOD_ID.toLowerCase() + ":";
