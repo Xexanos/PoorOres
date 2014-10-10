@@ -20,37 +20,58 @@ public class configHandler {
         config = new Configuration(configFile);
 
         //read worldgen config
-        Reference.CONFIG_WORLDGEN_COAL = config.getBoolean("baseWorldgenCoal", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for coal");
-        Reference.CONFIG_WORLDGEN_DIAMOND = config.getBoolean("baseWorldgenDiamond", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for diamond");
-        Reference.CONFIG_WORLDGEN_EMERALD = config.getBoolean("baseWorldgenEmerald", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for emerald");
-        Reference.CONFIG_WORLDGEN_GOLD = config.getBoolean("baseWorldgenGold", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for gold");
-        Reference.CONFIG_WORLDGEN_IRON = config.getBoolean("baseWorldgenIron", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for iron");
-        Reference.CONFIG_WORLDGEN_LAPIS = config.getBoolean("baseWorldgenLapis", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for lapis");
-        Reference.CONFIG_WORLDGEN_REDSTONE = config.getBoolean("baseWorldgenRedstone", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for redstone");
-        Reference.CONFIG_WORLDGEN_QUARTZ = config.getBoolean("baseWorldgenQuartz", config.CATEGORY_GENERAL, false, "Enable/Disable worldgen for quartz");
-        Reference.CONFIG_ADD_CRAFTING = config.getBoolean("add_crafting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for crafting");
-        Reference.CONFIG_ADD_SMELTING = config.getBoolean("add_smelting", config.CATEGORY_GENERAL, true, "Enable/Disable recipes for smelting");
+        Reference.CONFIG_WORLDGEN_COAL = config.getBoolean("baseWorldgenCoal", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for coal");
+        Reference.CONFIG_WORLDGEN_DIAMOND = config.getBoolean("baseWorldgenDiamond", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for diamond");
+        Reference.CONFIG_WORLDGEN_EMERALD = config.getBoolean("baseWorldgenEmerald", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for emerald");
+        Reference.CONFIG_WORLDGEN_GOLD = config.getBoolean("baseWorldgenGold", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for gold");
+        Reference.CONFIG_WORLDGEN_IRON = config.getBoolean("baseWorldgenIron", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for iron");
+        Reference.CONFIG_WORLDGEN_LAPIS = config.getBoolean("baseWorldgenLapis", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for lapis");
+        Reference.CONFIG_WORLDGEN_REDSTONE = config.getBoolean("baseWorldgenRedstone", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for redstone");
+        Reference.CONFIG_WORLDGEN_QUARTZ = config.getBoolean("baseWorldgenQuartz", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for quartz");
+        Reference.CONFIG_ADD_CRAFTING = config.getBoolean("add_crafting", Configuration.CATEGORY_GENERAL, true, "Enable/Disable recipes for crafting");
+        Reference.CONFIG_ADD_SMELTING = config.getBoolean("add_smelting", Configuration.CATEGORY_GENERAL, true, "Enable/Disable recipes for smelting");
 
         //adding vanilla ores
         config.get(Reference.CONFIG_PREFIX + "coal", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "coal", "baseBlock", "coal_ore");
+        config.get(Reference.CONFIG_PREFIX + "coal", "veinHeight", 120);
+        config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 16);
+        config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 48);
         config.get(Reference.CONFIG_PREFIX + "diamond", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "diamond", "baseBlock", "diamond_ore");
+        config.get(Reference.CONFIG_PREFIX + "diamond", "veinHeight", 16);
+        config.get(Reference.CONFIG_PREFIX + "diamond", "veinRate", 4);
+        config.get(Reference.CONFIG_PREFIX + "diamond", "veinSize", 8);
         config.get(Reference.CONFIG_PREFIX + "emerald", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "emerald", "baseBlock", "emerald_ore");
         config.get(Reference.CONFIG_PREFIX + "emerald", "oreRenderType", 1);
         config.get(Reference.CONFIG_PREFIX + "gold", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "gold", "baseBlock", "gold_ore");
+        config.get(Reference.CONFIG_PREFIX + "gold", "veinHeight", 32);
+        config.get(Reference.CONFIG_PREFIX + "gold", "veinRate", 3);
+        config.get(Reference.CONFIG_PREFIX + "gold", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "iron", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "iron", "baseBlock", "iron_ore");
+        config.get(Reference.CONFIG_PREFIX + "iron", "veinHeight", 64);
+        config.get(Reference.CONFIG_PREFIX + "iron", "veinRate", 16);
+        config.get(Reference.CONFIG_PREFIX + "iron", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "lapis", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "lapis", "baseBlock", "lapis_ore");
+        config.get(Reference.CONFIG_PREFIX + "lapis", "veinHeight", 32);
+        config.get(Reference.CONFIG_PREFIX + "lapis", "veinRate", 8);
+        config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
+        config.get(Reference.CONFIG_PREFIX + "redstone", "veinHeight", 16);
+        config.get(Reference.CONFIG_PREFIX + "redstone", "veinRate", 4);
+        config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "quartz", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "quartz", "baseBlock", "quartz_ore");
         config.get(Reference.CONFIG_PREFIX + "quartz", "underlyingBlock", "minecraft:netherrack");
         config.get(Reference.CONFIG_PREFIX + "quartz", "oreRenderType", 2);
+        config.get(Reference.CONFIG_PREFIX + "quartz", "veinHeight", 128);
+        config.get(Reference.CONFIG_PREFIX + "quartz", "veinRate", 10);
+        config.get(Reference.CONFIG_PREFIX + "quartz", "veinSize", 64);
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {
