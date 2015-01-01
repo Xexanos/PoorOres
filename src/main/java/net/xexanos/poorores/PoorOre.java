@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import net.xexanos.poorores.creativetab.CreativeTabPoorOres;
@@ -15,10 +17,12 @@ import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.textures.PoorOreTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoorOre extends Block {
     private String name;
+    private Nugget nugget;
     private int veinRate;
     private int veinSize;
     private int veinHeight;
@@ -72,6 +76,14 @@ public class PoorOre extends Block {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Nugget getNugget() {
+        return nugget;
+    }
+
+    public void setNugget(Nugget nugget) {
+        this.nugget = nugget;
     }
 
     public int getVeinRate() {
@@ -195,5 +207,20 @@ public class PoorOre extends Block {
 
             blockIcon = map.getTextureExtry(name);
         }
+    }
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+
+        for(ItemStack drops : baseBlock.getDrops(world, x, y, z, metadata, fortune)) {
+            if (drops.getItem() == Item.getItemFromBlock(baseBlock)) {
+                ret.add(new ItemStack(this, drops.stackSize));
+            } else {
+                ret.add(new ItemStack(this.getNugget(), drops.stackSize));
+            }
+        }
+
+        return ret;
     }
 }
