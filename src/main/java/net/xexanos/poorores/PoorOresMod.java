@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.xexanos.poorores.handler.configHandler;
 import net.xexanos.poorores.handler.eventHandler;
+import net.xexanos.poorores.handler.fuelHandler;
 import net.xexanos.poorores.init.Blocks;
 import net.xexanos.poorores.init.Items;
 import net.xexanos.poorores.reference.Reference;
@@ -31,6 +32,7 @@ public class PoorOresMod {
 
         MinecraftForge.ORE_GEN_BUS.register(new eventHandler());
         GameRegistry.registerWorldGenerator(new Generator(), 16);
+        GameRegistry.registerFuelHandler(new fuelHandler());
     }
 
     @Mod.EventHandler

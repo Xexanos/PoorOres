@@ -34,6 +34,7 @@ public class configHandler {
         //adding vanilla ores
         config.get(Reference.CONFIG_PREFIX + "coal", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "coal", "baseBlock", "coal_ore");
+        config.get(Reference.CONFIG_PREFIX + "coal", "burnTime", 200);
         config.get(Reference.CONFIG_PREFIX + "coal", "veinHeight", 120);
         config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 16);
         config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 48);
@@ -89,6 +90,7 @@ public class configHandler {
                         if (underlyingBlock != null) {
                             int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
                             int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
+                            int burnTime = config.get(category, "burnTime", 0).getInt();
                             int veinRate = config.get(category, "veinRate", 0).getInt();
                             int veinSize = config.get(category, "veinSize", 0).getInt();
                             int veinHeight = config.get(category, "veinHeight", 0).getInt();
@@ -119,7 +121,7 @@ public class configHandler {
                                 }
                             }
                             PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
-                            Nugget nugget = new Nugget(name, poorOre, baseBlockMeta, nuggetRenderType);
+                            Nugget nugget = new Nugget(name, poorOre, burnTime, baseBlockMeta, nuggetRenderType);
                             poorOre.setNugget(nugget);
                             Reference.ORES_LIST.add(poorOre);
                             Reference.NUGGETS_LIST.add(nugget);

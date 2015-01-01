@@ -22,14 +22,16 @@ public class Nugget extends Item {
     private String name;
     private PoorOre poorOre;
     private String oreDictName;
+    private int burnTime;
     private int meta;
     private int nuggetRenderType;
 
-    public Nugget(String name, PoorOre poorOre, int meta, int nuggetRenderType) {
+    public Nugget(String name, PoorOre poorOre, int burnTime, int meta, int nuggetRenderType) {
         super();
         setName(name + "_nugget");
         setUnlocalizedName(this.getName());
         setPoorOre(poorOre);
+        setBurnTime(burnTime);
         setMeta(meta);
         setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setNuggetRenderType(nuggetRenderType);
@@ -59,6 +61,14 @@ public class Nugget extends Item {
 
     public void setOreDictName(String oreDictName) {
         this.oreDictName = oreDictName;
+    }
+
+    public int getBurnTime() {
+        return burnTime;
+    }
+
+    public void setBurnTime(int burnTime) {
+        this.burnTime = burnTime;
     }
 
     public int getMeta() {
