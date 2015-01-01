@@ -16,7 +16,7 @@ public class configHandler {
 
     public static Configuration config;
 
-    public static void init(File configFile) {
+    public static void preInit(File configFile) {
         config = new Configuration(configFile);
 
         //read worldgen config

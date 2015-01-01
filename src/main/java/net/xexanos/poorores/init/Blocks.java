@@ -7,24 +7,13 @@ import net.xexanos.poorores.reference.Reference;
 
 public class Blocks {
     public static void preInit() {
-/*
         for (PoorOre poorOre : Reference.ORES_LIST) {
-            GameRegistry.registerBlock(poorOre, "poor_" + poorOre.getName() + "_ore");
+            GameRegistry.registerBlock(poorOre, PoorOreItem.class, "poor_" + poorOre.getName() + "_ore");
         }
-*/
     }
 
     public static void init() {
-/*
         for (PoorOre poorOre : Reference.ORES_LIST) {
-            poorOre.registerOreDict();
-        }
-*/
-    }
-
-    public static void postInit() {
-        for (PoorOre poorOre : Reference.ORES_LIST) {
-            GameRegistry.registerBlock(poorOre, PoorOreItem.class, "poor_" + poorOre.getName() + "_ore");
             poorOre.registerOreDict();
         }
     }
