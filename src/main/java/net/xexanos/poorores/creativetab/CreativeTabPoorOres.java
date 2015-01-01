@@ -8,7 +8,7 @@ public class CreativeTabPoorOres {
     public static final CreativeTabs POOR_ORES_TAB = new CreativeTabs(Reference.MOD_ID.toLowerCase()) {
         @Override
         public Item getTabIconItem() {
-            return Reference.NUGGETS_LIST.getFirst();
+            return Item.getItemFromBlock(Reference.ORES_LIST.getFirst());
         }
     };
 }
