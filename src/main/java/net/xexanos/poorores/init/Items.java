@@ -14,8 +14,13 @@ public class Items {
     public static void init() {
         for (Nugget nugget : Reference.NUGGETS_LIST) {
             nugget.registerOreDict();
-            nugget.registerRecipes();
+            nugget.registerSmelting();
         }
+    }
 
+    public static void postInit() {
+        for (Nugget nugget : Reference.NUGGETS_LIST) {
+            nugget.registerCrafting();
+        }
     }
 }

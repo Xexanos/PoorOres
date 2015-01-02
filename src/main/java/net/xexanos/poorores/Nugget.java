@@ -91,13 +91,21 @@ public class Nugget extends Item {
         return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta()));
     }
 
-    public void registerRecipes() {
-        if (Reference.CONFIG_ADD_CRAFTING) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(this.getIngot(), "nnn","nnn","nnn",'n', this.getOreDictName()));
-            GameRegistry.addShapelessRecipe(new ItemStack(this, 9), this.getIngot());
-        }
+    public void registerSmelting() {
         if (Reference.CONFIG_ADD_SMELTING) {
             GameRegistry.addSmelting(this.getPoorOre(), new ItemStack(this), 0.1f);
+        }
+    }
+
+    public void registerCrafting() {
+        if (Reference.CONFIG_ADD_CRAFTING) {
+            ItemStack ingot = getIngot();
+            if (ingot != null) {
+                GameRegistry.addShapelessRecipe(new ItemStack(this, 9), ingot);
+                GameRegistry.addRecipe(new ShapedOreRecipe(ingot, "nnn", "nnn", "nnn", 'n', getOreDictName()));
+            } else {
+                LogHelper.error(getName() + ": Could not get Ingot. Recipes will not be added.");
+            }
         }
     }
 
@@ -130,7 +138,7 @@ public class Nugget extends Item {
             if (texture == null) {
                 texture = new NuggetTexture(this);
                 if (!map.setTextureEntry(name, texture)) {
-                    LogHelper.error("Could not add texture for " + name + " after creation");
+                    LogHelper.error(getName() + ": Could not add texture after creation");
                 }
             }
 

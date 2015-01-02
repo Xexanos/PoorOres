@@ -29,13 +29,16 @@ public class PoorOre extends Block {
     private List<Integer> dimWhiteList;
     private List<Integer> dimBlackList;
     private Block baseBlock;
+    private String modID;
+    private String baseBlockName;
+    private int meta;
     private String baseBlockTexture;
     private Block underlyingBlock;
     private String underlyingBlockName;
     private String oreDictName;
     private int oreRenderType;
 
-    public PoorOre(String name, Block baseBlock, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
+    public PoorOre(String name, String modID, String baseBlockName, int meta, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
         super(Material.rock);
         setBlockName("poor_" + name + "_ore");
         setName(name);
@@ -44,7 +47,9 @@ public class PoorOre extends Block {
         setVeinHeight(veinHeight);
         setDimWhiteList(dimWhiteList);
         setDimBlackList(dimBlackList);
-        setBaseBlock(baseBlock);
+        setModID(modID);
+        setBaseBlockName(baseBlockName);
+        setMeta(meta);
         setBaseBlockTexture(baseBlockTexture);
         setUnderlyingBlock(underlyingBlock);
         setUnderlyingBlockName(underlyingBlockName);
@@ -127,11 +132,41 @@ public class PoorOre extends Block {
     }
 
     public Block getBaseBlock() {
+        if (baseBlock == null) {
+            if (setBaseBlock(Block.getBlockFromName(getModID() + ":" + getBaseBlockName())) == null) {
+                LogHelper.error(getName() + ": Could not get baseBlock.");
+            }
+        }
         return baseBlock;
     }
 
-    public void setBaseBlock(Block baseBlock) {
+    public Block setBaseBlock(Block baseBlock) {
         this.baseBlock = baseBlock;
+        return baseBlock;
+    }
+
+    public String getModID() {
+        return modID;
+    }
+
+    public void setModID(String modID) {
+        this.modID = modID;
+    }
+
+    public String getBaseBlockName() {
+        return baseBlockName;
+    }
+
+    public void setBaseBlockName(String baseBlockName) {
+        this.baseBlockName = baseBlockName;
+    }
+
+    public int getMeta() {
+        return meta;
+    }
+
+    public void setMeta(int meta) {
+        this.meta = meta;
     }
 
     public String getBaseBlockTexture() {
@@ -201,7 +236,7 @@ public class PoorOre extends Block {
             if (texture == null) {
                 texture = new PoorOreTexture(this);
                 if (!map.setTextureEntry(name, texture)) {
-                    LogHelper.error(getName() + ": Could not add texture after creation");
+                    LogHelper.error(getName() + ": Could not add texture after creation!");
                 }
             }
 

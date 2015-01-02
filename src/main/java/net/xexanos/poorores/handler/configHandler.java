@@ -82,8 +82,6 @@ public class configHandler {
                 if (modID.equals("minecraft") || Loader.isModLoaded(modID)) {
                     String baseBlockName = config.get(category, "baseBlock", "").getString();
                     int baseBlockMeta = config.get(category, "baseBlockMeta", 0).getInt();
-                    Block baseBlock = Block.getBlockFromName(modID + ":" + baseBlockName);
-                    if (baseBlock != null) {
                         String baseBlockTexture = config.get(category, "baseBlockTexture", modID + ":" + baseBlockName).getString();
                         String underlyingBlockName = config.get(category, "underlyingBlock", "minecraft:stone").getString();
                         Block underlyingBlock = Block.getBlockFromName(underlyingBlockName);
@@ -120,7 +118,7 @@ public class configHandler {
                                     }
                                 }
                             }
-                            PoorOre poorOre = new PoorOre(name, baseBlock, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
+                            PoorOre poorOre = new PoorOre(name, modID, baseBlockName, baseBlockMeta, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
                             Nugget nugget = new Nugget(name, poorOre, burnTime, baseBlockMeta, nuggetRenderType);
                             poorOre.setNugget(nugget);
                             Reference.ORES_LIST.add(poorOre);
@@ -129,12 +127,6 @@ public class configHandler {
                             LogHelper.warn(name + ": Underlying Block \"" + underlyingBlockName + "\" not found.");
                             LogHelper.warn(name + ": Ore will not be added.");
                         }
-
-                    } else {
-                        LogHelper.warn(name + ": Baseblock \"" + modID + ":" + baseBlockName + "\" not found.");
-                        LogHelper.warn(name + ": Ore will not be added.");
-                    }
-
 
                 } else {
                     LogHelper.warn(name + ": Corresponding mod \"" + modID + "\" is missing.");

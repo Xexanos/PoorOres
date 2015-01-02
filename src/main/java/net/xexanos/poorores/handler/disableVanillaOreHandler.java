@@ -5,7 +5,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent;
 import net.xexanos.poorores.reference.Reference;
 
-public class eventHandler {
+public class disableVanillaOreHandler {
 
     @SubscribeEvent
     public void onGenerateMinable(OreGenEvent.GenerateMinable event) {
