@@ -1,0 +1,25 @@
+itemGroup.poorores=Poor Ores
+
+poorores.prefix=Низкосортная ORENAME
+poorores.nuggets.prefix=NUGGETNAME самородок
+
+poorores.material.coal=Угольный
+poorores.material.diamond=Алмазный
+poorores.material.emerald=Изумрудный
+poorores.material.gold=Золотой
+poorores.material.iron=Железный
+poorores.material.lapis=Лазуритовый
+poorores.material.redstone=Красный
+poorores.material.quartz=Кварцевый
+
+poorores.material.apatite=Апатитовый
+poorores.material.copper=Медный
+poorores.material.tin=Оловянный
+
+poorores.material.lead=Свинцовый
+poorores.material.uran=Урановый
+
+poorores.material.aluminum=Алюминиевый
+poorores.material.aluminium=Алюминиевый
+
+poorores.material.osmium=Осмиевый
