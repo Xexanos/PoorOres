@@ -21,19 +21,25 @@ import net.xexanos.poorores.utility.LogHelper;
 public class Nugget extends Item {
     private String name;
     private PoorOre poorOre;
+    private int meta;
+    private boolean dust;
     private String oreDictName;
     private int burnTime;
-    private int meta;
     private int nuggetRenderType;
 
-    public Nugget(String name, PoorOre poorOre, int burnTime, int meta, int nuggetRenderType) {
+    public Nugget(String name, PoorOre poorOre, int meta, boolean dust, int burnTime, int nuggetRenderType) {
         super();
         setName(name + "_nugget");
         setUnlocalizedName(this.getName());
         setPoorOre(poorOre);
-        setBurnTime(burnTime);
         setMeta(meta);
-        setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
+        setDust(dust);
+        setBurnTime(burnTime);
+        if (dust) {
+            setOreDictName("dustTiny" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
+        } else {
+            setOreDictName("nugget" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
+        }
         setNuggetRenderType(nuggetRenderType);
         setCreativeTab(CreativeTabs.tabAllSearch);
         setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
@@ -55,6 +61,22 @@ public class Nugget extends Item {
         this.poorOre = poorOre;
     }
 
+    public int getMeta() {
+        return meta;
+    }
+
+    public void setMeta(int meta) {
+        this.meta = meta;
+    }
+
+    public boolean getDust() {
+        return dust;
+    }
+
+    public void setDust(boolean Dust) {
+        this.dust = Dust;
+    }
+
     public String getOreDictName() {
         return oreDictName;
     }
@@ -69,14 +91,6 @@ public class Nugget extends Item {
 
     public void setBurnTime(int burnTime) {
         this.burnTime = burnTime;
-    }
-
-    public int getMeta() {
-        return meta;
-    }
-
-    public void setMeta(int meta) {
-        this.meta = meta;
     }
 
     public int getNuggetRenderType() {
@@ -115,7 +129,12 @@ public class Nugget extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack nugget) {
-        String prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
+        String prefix;
+        if (getDust()) {
+            prefix = ("" + StatCollector.translateToLocal("poorores.dusts.prefix")).trim();
+        } else {
+            prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
+        }
         String material = ("" + StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
         if (material.length() == 0) {
             return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());

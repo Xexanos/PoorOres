@@ -63,6 +63,7 @@ public class configHandler {
         config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
+        config.get(Reference.CONFIG_PREFIX + "redstone", "isDust", true);
         config.get(Reference.CONFIG_PREFIX + "redstone", "veinHeight", 16);
         config.get(Reference.CONFIG_PREFIX + "redstone", "veinRate", 4);
         config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 32);
@@ -82,52 +83,52 @@ public class configHandler {
                 if (modID.equals("minecraft") || Loader.isModLoaded(modID)) {
                     String baseBlockName = config.get(category, "baseBlock", "").getString();
                     int baseBlockMeta = config.get(category, "baseBlockMeta", 0).getInt();
-                        String baseBlockTexture = config.get(category, "baseBlockTexture", modID + ":" + baseBlockName).getString();
-                        String underlyingBlockName = config.get(category, "underlyingBlock", "minecraft:stone").getString();
-                        Block underlyingBlock = Block.getBlockFromName(underlyingBlockName);
-                        if (underlyingBlock != null) {
-                            int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
-                            int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
-                            int burnTime = config.get(category, "burnTime", 0).getInt();
-                            int veinRate = config.get(category, "veinRate", 0).getInt();
-                            int veinSize = config.get(category, "veinSize", 0).getInt();
-                            int veinHeight = config.get(category, "veinHeight", 0).getInt();
-                            String dimWhiteListStr = config.get(category, "dimWhiteList", "").getString();
-                            LinkedList<Integer> dimWhiteList = new LinkedList<Integer>();
-                            if (dimWhiteListStr.length() != 0) {
-                                String[] dimWhiteListStrArray = dimWhiteListStr.split(",");
-                                for (String entry : dimWhiteListStrArray) {
-                                    try {
-                                        dimWhiteList.add(Integer.parseInt(entry));
-                                    } catch (NumberFormatException e) {
-                                        LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
-                                        LogHelper.warn(name + ": Entry will be ignored.");
-                                    }
+                    boolean dust = config.get(category, "isDust", false).getBoolean();
+                    String baseBlockTexture = config.get(category, "baseBlockTexture", modID + ":" + baseBlockName).getString();
+                    String underlyingBlockName = config.get(category, "underlyingBlock", "minecraft:stone").getString();
+                    Block underlyingBlock = Block.getBlockFromName(underlyingBlockName);
+                    if (underlyingBlock != null) {
+                        int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
+                        int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();
+                        int burnTime = config.get(category, "burnTime", 0).getInt();
+                        int veinRate = config.get(category, "veinRate", 0).getInt();
+                        int veinSize = config.get(category, "veinSize", 0).getInt();
+                        int veinHeight = config.get(category, "veinHeight", 0).getInt();
+                        String dimWhiteListStr = config.get(category, "dimWhiteList", "").getString();
+                        LinkedList<Integer> dimWhiteList = new LinkedList<Integer>();
+                        if (dimWhiteListStr.length() != 0) {
+                            String[] dimWhiteListStrArray = dimWhiteListStr.split(",");
+                            for (String entry : dimWhiteListStrArray) {
+                                try {
+                                    dimWhiteList.add(Integer.parseInt(entry));
+                                } catch (NumberFormatException e) {
+                                    LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
+                                    LogHelper.warn(name + ": Entry will be ignored.");
                                 }
                             }
-                            String dimBlackListStr = config.get(category, "dimBlackList", "").getString();
-                            List<Integer> dimBlackList = new LinkedList<Integer>();
-                            if (dimBlackListStr.length() != 0) {
-                                String[] dimBlackListStrArray = dimBlackListStr.split(",");
-                                for (String entry : dimBlackListStrArray) {
-                                    try {
-                                        dimBlackList.add(Integer.parseInt(entry));
-                                    } catch (NumberFormatException e) {
-                                        LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
-                                        LogHelper.warn(name + ": Entry will be ignored.");
-                                    }
-                                }
-                            }
-                            PoorOre poorOre = new PoorOre(name, modID, baseBlockName, baseBlockMeta, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
-                            Nugget nugget = new Nugget(name, poorOre, burnTime, baseBlockMeta, nuggetRenderType);
-                            poorOre.setNugget(nugget);
-                            Reference.ORES_LIST.add(poorOre);
-                            Reference.NUGGETS_LIST.add(nugget);
-                        } else {
-                            LogHelper.warn(name + ": Underlying Block \"" + underlyingBlockName + "\" not found.");
-                            LogHelper.warn(name + ": Ore will not be added.");
                         }
-
+                        String dimBlackListStr = config.get(category, "dimBlackList", "").getString();
+                        List<Integer> dimBlackList = new LinkedList<Integer>();
+                        if (dimBlackListStr.length() != 0) {
+                            String[] dimBlackListStrArray = dimBlackListStr.split(",");
+                            for (String entry : dimBlackListStrArray) {
+                                try {
+                                    dimBlackList.add(Integer.parseInt(entry));
+                                } catch (NumberFormatException e) {
+                                    LogHelper.warn(name + ": Could not parse " + entry + " to an integer.");
+                                    LogHelper.warn(name + ": Entry will be ignored.");
+                                }
+                            }
+                        }
+                        PoorOre poorOre = new PoorOre(name, modID, baseBlockName, baseBlockMeta, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
+                        Nugget nugget = new Nugget(name, poorOre, baseBlockMeta, dust, burnTime, nuggetRenderType);
+                        poorOre.setNugget(nugget);
+                        Reference.ORES_LIST.add(poorOre);
+                        Reference.NUGGETS_LIST.add(nugget);
+                    } else {
+                        LogHelper.warn(name + ": Underlying Block \"" + underlyingBlockName + "\" not found.");
+                        LogHelper.warn(name + ": Ore will not be added.");
+                    }
                 } else {
                     LogHelper.warn(name + ": Corresponding mod \"" + modID + "\" is missing.");
                     LogHelper.warn(name + ": Ore will not be added.");

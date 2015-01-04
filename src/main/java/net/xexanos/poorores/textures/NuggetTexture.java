@@ -72,7 +72,12 @@ public class NuggetTexture extends TextureAtlasSprite {
                 }
                 ingotName = ingotName.substring(i + 1);
                 IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod, "textures/items/" + ingotName + ".png"));
-                IResource iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
+                IResource iResourceNugget;
+                if (getNugget().getDust()) {
+                    iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/dust_" + getNugget().getNuggetRenderType() + ".png"));
+                } else {
+                    iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
+                }
 
                 // load the ore texture
                 ingot_image[0] = ImageIO.read(iResourceIngot.getInputStream());

@@ -2,6 +2,7 @@ itemGroup.poorores=Poor Ores
 
 poorores.prefix=dürftiges ORENAME
 poorores.nuggets.prefix=NUGGETNAMEnugget
+poorores.dusts.prefix=kleiner Haufen NUGGETNAME
 
 poorores.material.coal=Kohle
 poorores.material.diamond=Diamant
