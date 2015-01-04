@@ -208,7 +208,6 @@ public class PoorOre extends Block {
 
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
-        OreDictionary.registerOre("poorOreAll", this);
     }
 
     @Override

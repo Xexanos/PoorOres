@@ -111,7 +111,6 @@ public class Nugget extends Item {
 
     public void registerOreDict() {
         OreDictionary.registerOre(getOreDictName(), this);
-        OreDictionary.registerOre("nuggetAll", this);
     }
 
     @Override
