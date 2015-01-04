@@ -2,6 +2,7 @@ itemGroup.poorores=Poor Ores
 
 poorores.prefix=Низкосортная ORENAME
 poorores.nuggets.prefix=NUGGETNAME самородок
+poorores.dusts.prefix=Небольшая кучка DUSTNAME
 
 poorores.material.coal=Угольный
 poorores.material.diamond=Алмазный
@@ -23,3 +24,24 @@ poorores.material.aluminum=Алюминиевый
 poorores.material.aluminium=Алюминиевый
 
 poorores.material.osmium=Осмиевый
+
+poorores.material.dust.coal=угольной пыли
+poorores.material.dust.diamond=алмазной пыли
+poorores.material.dust.emerald=изумрудной пыли
+poorores.material.dust.gold=золотой пыли
+poorores.material.dust.iron=железной пыли
+poorores.material.dust.lapis=лазуритовой пыли
+poorores.material.dust.redstone=красной пыли
+poorores.material.dust.quartz=кварцевой пыли Нижнего мира
+
+poorores.material.dust.apatite=апатитовой пыли
+poorores.material.dust.copper=медной пыли
+poorores.material.dust.tin=оловянной пыли
+
+poorores.material.dust.lead=свинцовой пыли
+poorores.material.dust.uran=урановой пыли
+
+poorores.material.dust.aluminum=алюминиевой пыли
+poorores.material.dust.aluminium=алюминиевой пыли
+
+poorores.material.dust.osmium=осмиевой пыли
