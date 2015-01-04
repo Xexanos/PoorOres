@@ -132,14 +132,20 @@ public class Nugget extends Item {
         String prefix;
         if (getDust()) {
             prefix = ("" + StatCollector.translateToLocal("poorores.dusts.prefix")).trim();
+            String material = ("" + StatCollector.translateToLocal("poorores.material.dust." + getPoorOre().getName())).trim();
+            if (material.length() == 0) {
+                return prefix.replaceFirst("DUSTNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
+            } else {
+                return prefix.replaceFirst("DUSTNAME", material);
+            }
         } else {
             prefix = ("" + StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
-        }
-        String material = ("" + StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
-        if (material.length() == 0) {
-            return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
-        } else {
-            return prefix.replaceFirst("NUGGETNAME", material);
+            String material = ("" + StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
+            if (material.length() == 0) {
+                return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
+            } else {
+                return prefix.replaceFirst("NUGGETNAME", material);
+            }
         }
     }
 

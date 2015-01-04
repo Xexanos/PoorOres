@@ -2,7 +2,7 @@ itemGroup.poorores=Poor Ores
 
 poorores.prefix=dürftiges ORENAME
 poorores.nuggets.prefix=NUGGETNAMEnugget
-poorores.dusts.prefix=kleiner Haufen NUGGETNAME
+poorores.dusts.prefix=kleiner Haufen DUSTNAME
 
 poorores.material.coal=Kohle
 poorores.material.diamond=Diamant
@@ -24,3 +24,24 @@ poorores.material.aluminum=Aluminium
 poorores.material.aluminium=Aluminium
 
 poorores.material.osmium=Osmium
+
+poorores.material.dust.coal=Kohle
+poorores.material.dust.diamond=Diamant
+poorores.material.dust.emerald=Smaragd
+poorores.material.dust.gold=Gold
+poorores.material.dust.iron=Eisen
+poorores.material.dust.lapis=Lapis Lazuli
+poorores.material.dust.redstone=Redstone
+poorores.material.dust.quartz=Netherquarz
+
+poorores.material.dust.apatite=Apatite
+poorores.material.dust.copper=Kupfer
+poorores.material.dust.tin=Zinn
+
+poorores.material.dust.lead=Blei
+poorores.material.dust.uran=Uran
+
+poorores.material.dust.aluminum=Aluminium
+poorores.material.dust.aluminium=Aluminium
+
+poorores.material.dust.osmium=Osmium
