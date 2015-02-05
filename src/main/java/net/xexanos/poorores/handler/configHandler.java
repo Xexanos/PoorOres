@@ -98,7 +98,7 @@ public class configHandler {
                     if (underlyingBlock != null) {
                         int nuggetColor = 0x0;
                         if (config.hasKey(category, "nuggetColor")) {
-                            nuggetColor = Integer.decode(config.get(category, "nuggetColor", "0xFFFFFF").getString());
+                            nuggetColor = Integer.decode(config.get(category, "nuggetColor", "0x000000").getString());
                         }
                         int oreRenderType = config.get(category, "oreRenderType", 0).getInt();
                         int nuggetRenderType = config.get(category, "nuggetRenderType", 0).getInt();

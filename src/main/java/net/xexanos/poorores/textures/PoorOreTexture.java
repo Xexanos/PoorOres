@@ -26,7 +26,7 @@ public class PoorOreTexture extends TextureAtlasSprite {
     @Override
     public boolean hasCustomLoader(IResourceManager manager, ResourceLocation location) {
 
-        ResourceLocation location1 = new ResourceLocation(location.getResourceDomain(), String.format("%s/%s%s", new Object[]{"textures/blocks", location.getResourcePath(), ".png"}));
+        ResourceLocation location1 = new ResourceLocation(location.getResourceDomain(), String.format("%s/%s%s", "textures/blocks", location.getResourcePath(), ".png"));
         try {
             // check to see if the resource can be loaded (someone added an override)
             manager.getResource(location1);

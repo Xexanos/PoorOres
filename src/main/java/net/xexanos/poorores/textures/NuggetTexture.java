@@ -23,6 +23,30 @@ public class NuggetTexture extends TextureAtlasSprite {
         setNugget(nugget);
     }
 
+    public static int getAlpha(int col) {
+        return (col & 0xff000000) >> 24;
+    }
+
+    public static int getRed(int col) {
+        return (col & 0x00ff0000) >> 16;
+    }
+
+    public static int getGreen(int col) {
+        return (col & 0x0000ff00) >> 8;
+    }
+
+    public static int getBlue(int col) {
+        return col & 0x000000ff;
+    }
+
+    public static int makeCol(int red, int green, int blue) {
+        return makeCol(red, green, blue, 0xff);
+    }
+
+    public static int makeCol(int red, int green, int blue, int alpha) {
+        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+    }
+
     public Nugget getNugget() {
         return nugget;
     }
@@ -61,6 +85,7 @@ public class NuggetTexture extends TextureAtlasSprite {
 
             AnimationMetadataSection animation = null;
 
+            // read grayscale texture to color
             try {
                 IResource iResourceNugget;
                 if (getNugget().getDust()) {
@@ -80,6 +105,7 @@ public class NuggetTexture extends TextureAtlasSprite {
 
             int avgCol = getNugget().getNuggetColor();
 
+            // if color is set to 0x0 (black) try to get the color of the ingot to use
             if (avgCol == 0x0) {
                 try {
                     String ingotName = ingot.getItem().getIcon(ingot, 0).getIconName();
@@ -115,6 +141,7 @@ public class NuggetTexture extends TextureAtlasSprite {
             nugget_image.getRGB(0, 0, wn, wn, nugget_data, 0, wn);
 
             for (int y = 0; y < h; y += wn) {
+                // if color is set to 0x0 (black) use the average of all the colors of the ingot
                 if (avgCol == 0x0) {
                     ingot_image[0].getRGB(0, y / wn * wi, wi, wi, ingot_data, 0, wi);
 
@@ -152,11 +179,12 @@ public class NuggetTexture extends TextureAtlasSprite {
             ingot_image[0] = output_image;
 
 /*
-        try {
-            ImageIO.write(output_image, "png", new File(getNugget().getName() + "_" + (getNugget().getNuggetRenderType() + 2) + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            // write image to filesystem
+            try {
+                ImageIO.write(output_image, "png", new File(getNugget().getName() + "_" + (getNugget().getNuggetRenderType() + 2) + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 */
 
             // load the texture
@@ -165,29 +193,5 @@ public class NuggetTexture extends TextureAtlasSprite {
             LogHelper.info("Successfully generated texture for \"" + nugget.getName() + "\". Place \"" + nugget.getName() + ".png\" in the assets folder to override.");
             return false;
         }
-    }
-
-    public static int getAlpha(int col) {
-        return (col & 0xff000000) >> 24;
-    }
-
-    public static int getRed(int col) {
-        return (col & 0x00ff0000) >> 16;
-    }
-
-    public static int getGreen(int col) {
-        return (col & 0x0000ff00) >> 8;
-    }
-
-    public static int getBlue(int col) {
-        return col & 0x000000ff;
-    }
-
-    public static int makeCol(int red, int green, int blue) {
-        return makeCol(red, green, blue, 0xff);
-    }
-
-    public static int makeCol(int red, int green, int blue, int alpha) {
-        return (alpha << 24) | (red << 16) | (green << 8) | blue;
     }
 }

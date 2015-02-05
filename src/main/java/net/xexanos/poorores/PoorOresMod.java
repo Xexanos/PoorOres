@@ -17,10 +17,9 @@ import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class PoorOresMod {
-    File configName;
-
     @Mod.Instance(Reference.MOD_ID)
     public static PoorOresMod instance;
+    File configName;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
