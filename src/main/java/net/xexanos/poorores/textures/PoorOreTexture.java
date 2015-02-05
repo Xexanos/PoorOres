@@ -90,7 +90,7 @@ public class PoorOreTexture extends TextureAtlasSprite {
             return true;
         }
 
-        float div = underlying_image.getWidth() / alpha_image.getWidth();
+        int div = w / alpha_image.getWidth();
 
         int h = ore_image[0].getHeight();
 
@@ -98,20 +98,21 @@ public class PoorOreTexture extends TextureAtlasSprite {
 
         int[] ore_data = new int[w * w];
         int[] underlying_data = new int[w * w];
-        int[] alpha_data = new int[w * w];
+        int[] alpha_data = new int[(w / div) * (w / div)];
 
         underlying_image.getRGB(0, 0, w, w, underlying_data, 0, w);
-        alpha_image.getRGB(0, 0, w, w, alpha_data, 0, w);
+        alpha_image.getRGB(0, 0, w / div, w / div, alpha_data, 0, w / div);
 
         for (int y = 0; y < h; y += w) {
             ore_image[0].getRGB(0, y, w, w, ore_data, 0, w);
 
             int[] new_data = new int[w * w];
 
-            for (int ih = 0; ih < w * w; ih += w) {
+            for (int ih = 0; ih < w; ih++) {
                 for (int iw = 0; iw < w; iw++) {
-                    float alpha = (alpha_data[(int) ((iw + ih) / div)]) & 0xffffff / 0xffffff;
-                    new_data[ih + iw] = 0xff000000 + ((int)(ore_data[iw + ih] * alpha + underlying_data[iw + ih]  * (1 - alpha)) & 0xffffff);
+
+                    float alpha = ((float)((alpha_data[iw / div + (ih / div) * alpha_image.getWidth()]) & 0xffffff)) / 0xffffff;
+                    new_data[iw + ih * w] = 0xff000000 + ((int)(ore_data[iw + ih * w] * alpha + underlying_data[iw + ih * w]  * (1 - alpha)) & 0xffffff);
                 }
             }
 
