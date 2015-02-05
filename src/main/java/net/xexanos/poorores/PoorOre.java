@@ -31,14 +31,14 @@ public class PoorOre extends Block {
     private Block baseBlock;
     private String modID;
     private String baseBlockName;
-    private int meta;
+    private int baseBlockMeta;
     private String baseBlockTexture;
     private Block underlyingBlock;
     private String underlyingBlockName;
     private String oreDictName;
     private int oreRenderType;
 
-    public PoorOre(String name, String modID, String baseBlockName, int meta, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
+    public PoorOre(String name, String modID, String baseBlockName, int baseBlockMeta, String baseBlockTexture, Block underlyingBlock, String underlyingBlockName, int oreRenderType, int veinRate, int veinSize, int veinHeight, List<Integer> dimWhiteList, List<Integer> dimBlackList) {
         super(Material.rock);
         setBlockName("poor_" + name + "_ore");
         setName(name);
@@ -49,7 +49,7 @@ public class PoorOre extends Block {
         setDimBlackList(dimBlackList);
         setModID(modID);
         setBaseBlockName(baseBlockName);
-        setMeta(meta);
+        setBaseBlockMeta(baseBlockMeta);
         setBaseBlockTexture(baseBlockTexture);
         setUnderlyingBlock(underlyingBlock);
         setUnderlyingBlockName(underlyingBlockName);
@@ -161,12 +161,12 @@ public class PoorOre extends Block {
         this.baseBlockName = baseBlockName;
     }
 
-    public int getMeta() {
-        return meta;
+    public int getBaseBlockMeta() {
+        return baseBlockMeta;
     }
 
-    public void setMeta(int meta) {
-        this.meta = meta;
+    public void setBaseBlockMeta(int baseBlockMeta) {
+        this.baseBlockMeta = baseBlockMeta;
     }
 
     public String getBaseBlockTexture() {

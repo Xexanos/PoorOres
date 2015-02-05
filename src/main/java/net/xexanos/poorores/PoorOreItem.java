@@ -17,7 +17,7 @@ public class PoorOreItem extends ItemBlock {
     @Override
     public String getItemStackDisplayName(ItemStack itemStack) {
         String prefix = ("" + StatCollector.translateToLocal("poorores.prefix")).trim();
-        return prefix.replaceFirst("ORENAME", new ItemStack(getPoorOre().getBaseBlock(), 1, getPoorOre().getMeta()).getDisplayName());
+        return prefix.replaceFirst("ORENAME", new ItemStack(getPoorOre().getBaseBlock(), 1, getPoorOre().getBaseBlockMeta()).getDisplayName());
     }
 
 

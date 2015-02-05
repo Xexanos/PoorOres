@@ -136,7 +136,7 @@ public class Nugget extends Item {
             if (material.equals(("poorores.material.dust." + getPoorOre().getName()).trim())) {
                 material = (StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
                 if (material.equals(("poorores.material." + getPoorOre().getName()).trim())) {
-                    return prefix.replaceFirst("DUSTNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
+                    return prefix.replaceFirst("DUSTNAME", new ItemStack(getPoorOre().getBaseBlock(), 1, getPoorOre().getBaseBlockMeta()).getDisplayName());
                 } else {
                     return prefix.replaceFirst("DUSTNAME", material);
                 }
@@ -147,7 +147,7 @@ public class Nugget extends Item {
             prefix = (StatCollector.translateToLocal("poorores.nuggets.prefix")).trim();
             String material = (StatCollector.translateToLocal("poorores.material." + getPoorOre().getName())).trim();
             if (material.equals(("poorores.material." + getPoorOre().getName()).trim())) {
-                return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock()).getDisplayName());
+                return prefix.replaceFirst("NUGGETNAME", new ItemStack(getPoorOre().getBaseBlock(), 1, getPoorOre().getBaseBlockMeta()).getDisplayName());
             } else {
                 return prefix.replaceFirst("NUGGETNAME", material);
             }
