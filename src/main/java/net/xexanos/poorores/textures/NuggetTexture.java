@@ -71,7 +71,7 @@ public class NuggetTexture extends TextureAtlasSprite {
                     ingotMod = ingotName.substring(0, i);
                 }
                 ingotName = ingotName.substring(i + 1);
-                IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod, "textures/items/" + ingotName + ".png"));
+                IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod.toLowerCase(), "textures/items/" + ingotName + ".png"));
                 IResource iResourceNugget;
                 if (getNugget().getDust()) {
                     iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/dust_" + getNugget().getNuggetRenderType() + ".png"));
