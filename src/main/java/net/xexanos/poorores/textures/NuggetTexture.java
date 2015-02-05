@@ -5,9 +5,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.AnimationMetadataSection;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.xexanos.poorores.Nugget;
 import net.xexanos.poorores.reference.Reference;
@@ -49,29 +47,21 @@ public class NuggetTexture extends TextureAtlasSprite {
 
     @Override
     public boolean load(IResourceManager manager, ResourceLocation location) {
-        int mp = Minecraft.getMinecraft().gameSettings.mipmapLevels + 1;
+        ItemStack ingot = getNugget().getIngot();
+        if (ingot == null) {
+            LogHelper.error("Could not get corresponding ingot for " + getNugget().getName());
+            return true;
+        } else {
+            int mp = Minecraft.getMinecraft().gameSettings.mipmapLevels + 1;
 
-        BufferedImage[] ingot_image = new BufferedImage[mp];
+            BufferedImage[] ingot_image = new BufferedImage[mp];
 
-        BufferedImage nugget_image;
-        int wi;
+            BufferedImage nugget_image;
+            int wi = 1;
 
-        AnimationMetadataSection animation;
+            AnimationMetadataSection animation = null;
 
-        try {
-            ItemStack ingot = getNugget().getIngot();
-            if (ingot == null) {
-                LogHelper.error("Could not get corresponding ingot for " + getNugget().getName());
-                return true;
-            } else {
-                String ingotName = ingot.getItem().getIcon(ingot, 0).getIconName();
-                int i = ingotName.indexOf(":");
-                String ingotMod = "minecraft";
-                if (i != -1) {
-                    ingotMod = ingotName.substring(0, i);
-                }
-                ingotName = ingotName.substring(i + 1);
-                IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod.toLowerCase(), "textures/items/" + ingotName + ".png"));
+            try {
                 IResource iResourceNugget;
                 if (getNugget().getDust()) {
                     iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/dust_" + getNugget().getNuggetRenderType() + ".png"));
@@ -79,67 +69,87 @@ public class NuggetTexture extends TextureAtlasSprite {
                     iResourceNugget = manager.getResource(new ResourceLocation(Reference.MOD_ID.toLowerCase(), "textures/items/nugget_" + getNugget().getNuggetRenderType() + ".png"));
                 }
 
-                // load the ore texture
-                ingot_image[0] = ImageIO.read(iResourceIngot.getInputStream());
-
-                // load animation
-                animation = (AnimationMetadataSection) iResourceIngot.getMetadata("animation");
-
                 nugget_image = ImageIO.read(iResourceNugget.getInputStream());
-
-                wi = ingot_image[0].getWidth();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return true;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return true;
-        }
 
-        int h = ingot_image[0].getHeight();
-        int wn = nugget_image.getWidth();
+            int wn = nugget_image.getWidth();
+            int h = wn;
 
-        h = (h * wn) / wi;
+            int avgCol = getNugget().getNuggetColor();
 
-        BufferedImage output_image = new BufferedImage(wn, h, BufferedImage.TYPE_4BYTE_ABGR);
+            if (avgCol == 0x0) {
+                try {
+                    String ingotName = ingot.getItem().getIcon(ingot, 0).getIconName();
+                    int i = ingotName.indexOf(":");
+                    String ingotMod = "minecraft";
+                    if (i != -1) {
+                        ingotMod = ingotName.substring(0, i);
+                    }
+                    ingotName = ingotName.substring(i + 1);
 
-        int[] ingot_data = new int[wi * wi];
-        int[] nugget_data = new int[wn * wn];
+                    IResource iResourceIngot = manager.getResource(new ResourceLocation(ingotMod.toLowerCase(), "textures/items/" + ingotName + ".png"));
 
-        nugget_image.getRGB(0, 0, wn, wn, nugget_data, 0, wn);
+                    // load the ingot texture
+                    ingot_image[0] = ImageIO.read(iResourceIngot.getInputStream());
 
-        for (int y = 0; y < h; y += wn) {
-            ingot_image[0].getRGB(0, y / wn * wi, wi, wi, ingot_data, 0, wi);
+                    // load animation
+                    animation = (AnimationMetadataSection) iResourceIngot.getMetadata("animation");
 
-            int sumR = 0, sumG = 0, sumB = 0;
-            int div = 0;
-            for (int i = 0; i < ingot_data.length; i++) {
-                int col = ingot_data[i];
-                if (getAlpha(col) != 0x00) {
-                    sumR += getRed(col);
-                    sumG += getGreen(col);
-                    sumB += getBlue(col);
-                    div++;
+                    wi = ingot_image[0].getWidth();
+                    h = ingot_image[0].getHeight();
+                    h = (h / wi) * wn;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return true;
                 }
             }
-            int avgCol = makeCol(sumR/div, sumG/div, sumB/div);
 
-            int[] new_data = nugget_data.clone();
+            BufferedImage output_image = new BufferedImage(wn, h, BufferedImage.TYPE_4BYTE_ABGR);
 
-            for (int i = 0; i < new_data.length; i++) {
-                int col = new_data[i];
-                if (getAlpha(col) != 0x00) {
-                    int mult = getRed(col);
+            int[] ingot_data = new int[wi * wi];
+            int[] nugget_data = new int[wn * wn];
+
+            nugget_image.getRGB(0, 0, wn, wn, nugget_data, 0, wn);
+
+            for (int y = 0; y < h; y += wn) {
+                if (avgCol == 0x0) {
+                    ingot_image[0].getRGB(0, y / wn * wi, wi, wi, ingot_data, 0, wi);
+
+                    int sumR = 0, sumG = 0, sumB = 0;
+                    int div = 0;
+                    for (int i = 0; i < wi * wi; i++) {
+                        int col = ingot_data[i];
+                        if (getAlpha(col) != 0x00) {
+                            sumR += getRed(col);
+                            sumG += getGreen(col);
+                            sumB += getBlue(col);
+                            div++;
+                        }
+                    }
+                    avgCol = makeCol(sumR / div, sumG / div, sumB / div);
+                }
+
+                int[] new_data = nugget_data.clone();
+
+                for (int i = 0; i < new_data.length; i++) {
+                    int col = new_data[i];
+                    if (getAlpha(col) != 0x00) {
+                        int mult = getBlue(col);
 
 //                    new_data[i] = makeCol((getRed(avgCol) + mult) / 2, (getGreen(avgCol) + mult) / 2, (getBlue(avgCol) + mult) / 2);
-                    new_data[i] = makeCol((getRed(avgCol) * mult) / 0xff, (getGreen(avgCol) * mult) / 0xff, (getBlue(avgCol) * mult) / 0xff);
+                        new_data[i] = makeCol((getRed(avgCol) * mult) / 0xff, (getGreen(avgCol) * mult) / 0xff, (getBlue(avgCol) * mult) / 0xff);
+                    }
                 }
+
+                // write the new image data to the output image buffer
+                output_image.setRGB(0, y, wn, wn, new_data, 0, wn);
             }
 
-            // write the new image data to the output image buffer
-            output_image.setRGB(0, y, wn, wn, new_data, 0, wn);
-        }
-
-        // replace the old texture
-        ingot_image[0] = output_image;
+            // replace the old texture
+            ingot_image[0] = output_image;
 
 /*
         try {
@@ -149,11 +159,12 @@ public class NuggetTexture extends TextureAtlasSprite {
         }
 */
 
-        // load the texture
-        this.loadSprite(ingot_image, animation, (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
+            // load the texture
+            this.loadSprite(ingot_image, animation, (float) Minecraft.getMinecraft().gameSettings.anisotropicFiltering > 1.0F);
 
-        LogHelper.info("Successfully generated texture for \"" + nugget.getName() + "\". Place \"" + nugget.getName() + ".png\" in the assets folder to override.");
-        return false;
+            LogHelper.info("Successfully generated texture for \"" + nugget.getName() + "\". Place \"" + nugget.getName() + ".png\" in the assets folder to override.");
+            return false;
+        }
     }
 
     public static int getAlpha(int col) {

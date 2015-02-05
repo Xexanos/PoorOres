@@ -211,14 +211,12 @@ public class PoorOre extends Block {
     }
 
     @Override
-    public int getHarvestLevel(int metadata)
-    {
+    public int getHarvestLevel(int metadata) {
         return getBaseBlock().getHarvestLevel(metadata);
     }
 
     @Override
-    public String getHarvestTool(int metadata)
-    {
+    public String getHarvestTool(int metadata) {
         return getBaseBlock().getHarvestTool(metadata);
     }
 
@@ -247,7 +245,7 @@ public class PoorOre extends Block {
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
         ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 
-        for(ItemStack drops : baseBlock.getDrops(world, x, y, z, metadata, fortune)) {
+        for (ItemStack drops : baseBlock.getDrops(world, x, y, z, metadata, fortune)) {
             if (drops.getItem() == Item.getItemFromBlock(baseBlock)) {
                 ret.add(new ItemStack(this, drops.stackSize));
             } else {

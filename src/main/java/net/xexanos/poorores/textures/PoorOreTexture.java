@@ -12,7 +12,6 @@ import net.xexanos.poorores.utility.LogHelper;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class PoorOreTexture extends TextureAtlasSprite {
             w = ore_image[0].getWidth();
 
             if (underlying_image.getWidth() != w) {
-                List resourcePacks = manager.getAllResources(new ResourceLocation(poorOre.getUnderlyingBlockName().substring(0, index),"textures/blocks/" + poorOre.getUnderlyingBlockName().substring(index + 1) + ".png"));
+                List resourcePacks = manager.getAllResources(new ResourceLocation(poorOre.getUnderlyingBlockName().substring(0, index), "textures/blocks/" + poorOre.getUnderlyingBlockName().substring(index + 1) + ".png"));
                 for (int i = resourcePacks.size() - 1; i >= 0; --i) {
                     IResource resource = (IResource) resourcePacks.get(i);
                     underlying_image = ImageIO.read(resource.getInputStream());
@@ -111,8 +110,8 @@ public class PoorOreTexture extends TextureAtlasSprite {
             for (int ih = 0; ih < w; ih++) {
                 for (int iw = 0; iw < w; iw++) {
 
-                    float alpha = ((float)((alpha_data[iw / div + (ih / div) * alpha_image.getWidth()]) & 0xffffff)) / 0xffffff;
-                    new_data[iw + ih * w] = 0xff000000 + ((int)(ore_data[iw + ih * w] * alpha + underlying_data[iw + ih * w]  * (1 - alpha)) & 0xffffff);
+                    float alpha = ((float) ((alpha_data[iw / div + (ih / div) * alpha_image.getWidth()]) & 0xffffff)) / 0xffffff;
+                    new_data[iw + ih * w] = 0xff000000 + ((int) (ore_data[iw + ih * w] * alpha + underlying_data[iw + ih * w] * (1 - alpha)) & 0xffffff);
                 }
             }
 

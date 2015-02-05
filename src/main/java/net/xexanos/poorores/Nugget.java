@@ -25,6 +25,7 @@ public class Nugget extends Item {
     private boolean dust;
     private String oreDictName;
     private int burnTime;
+    private int nuggetColor;
     private int nuggetRenderType;
 
     public Nugget(String name, PoorOre poorOre, int meta, boolean dust, int burnTime, int nuggetRenderType) {
@@ -43,6 +44,11 @@ public class Nugget extends Item {
         setNuggetRenderType(nuggetRenderType);
         setCreativeTab(CreativeTabs.tabAllSearch);
         setCreativeTab(CreativeTabPoorOres.POOR_ORES_TAB);
+    }
+
+    public Nugget(String name, PoorOre poorOre, int meta, boolean dust, int burnTime, int nuggetColor, int nuggetRenderType) {
+        this(name, poorOre, meta, dust, burnTime, nuggetRenderType);
+        setNuggetColor(nuggetColor);
     }
 
     public String getName() {
@@ -91,6 +97,14 @@ public class Nugget extends Item {
 
     public void setBurnTime(int burnTime) {
         this.burnTime = burnTime;
+    }
+
+    public int getNuggetColor() {
+        return nuggetColor;
+    }
+
+    public void setNuggetColor(int nuggetColor) {
+        this.nuggetColor = nuggetColor;
     }
 
     public int getNuggetRenderType() {
