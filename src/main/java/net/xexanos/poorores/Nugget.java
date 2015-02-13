@@ -18,6 +18,8 @@ import net.xexanos.poorores.reference.Reference;
 import net.xexanos.poorores.textures.NuggetTexture;
 import net.xexanos.poorores.utility.LogHelper;
 
+import java.util.Random;
+
 public class Nugget extends Item {
     private String name;
     private PoorOre poorOre;
@@ -27,6 +29,7 @@ public class Nugget extends Item {
     private int burnTime;
     private int nuggetColor;
     private int nuggetRenderType;
+    private ItemStack ingot = null;
 
     public Nugget(String name, PoorOre poorOre, int meta, boolean dust, int burnTime, int nuggetRenderType) {
         super();
@@ -116,7 +119,16 @@ public class Nugget extends Item {
     }
 
     public ItemStack getIngot() {
-        return FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta()));
+        if (ingot == null) {
+            ItemStack ingot = new ItemStack(getPoorOre().getBaseBlock().getItemDropped(getPoorOre().getBaseBlockMeta(), new Random(), 0), 1, getMeta());
+            ItemStack block = new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta());
+            if (ingot.isItemEqual(block)) {
+                this.ingot = FurnaceRecipes.smelting().getSmeltingResult(block);
+            } else {
+                this.ingot = ingot;
+            }
+        }
+        return ingot;
     }
 
     public void registerSmelting() {
