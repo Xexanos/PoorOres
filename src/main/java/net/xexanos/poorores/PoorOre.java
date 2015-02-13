@@ -54,7 +54,6 @@ public class PoorOre extends Block {
         setUnderlyingBlock(underlyingBlock);
         setUnderlyingBlockName(underlyingBlockName);
         setOreRenderType(oreRenderType);
-        setOreDictName("orePoorAll");
         setOreDictName("orePoor" + Character.toString(name.charAt(0)).toUpperCase() + name.substring(1));
         setCreativeTab(CreativeTabs.tabBlock);
         setCreativeTab(CreativeTabs.tabAllSearch);

@@ -30,58 +30,63 @@ public class configHandler {
         Reference.CONFIG_WORLDGEN_QUARTZ = config.getBoolean("baseWorldgenQuartz", Configuration.CATEGORY_GENERAL, false, "Enable/Disable worldgen for quartz");
         Reference.CONFIG_ADD_CRAFTING = config.getBoolean("add_crafting", Configuration.CATEGORY_GENERAL, true, "Enable/Disable recipes for crafting");
         Reference.CONFIG_ADD_SMELTING = config.getBoolean("add_smelting", Configuration.CATEGORY_GENERAL, true, "Enable/Disable recipes for smelting");
+        Reference.CONFIG_ALL_DUSTS = config.getBoolean("all_dusts", Configuration.CATEGORY_GENERAL, false, "Enable/Disable creation of tiny piles of dust for all ores");
 
         //adding vanilla ores
-        config.get(Reference.CONFIG_PREFIX + "coal", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "coal", "baseBlock", "coal_ore");
-        config.get(Reference.CONFIG_PREFIX + "coal", "burnTime", 200);
-        config.get(Reference.CONFIG_PREFIX + "coal", "nuggetColor", "0x363636");
-        config.get(Reference.CONFIG_PREFIX + "coal", "veinHeight", 120);
-        config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 12);
-        config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 32);
-        config.get(Reference.CONFIG_PREFIX + "diamond", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "diamond", "baseBlock", "diamond_ore");
-        config.get(Reference.CONFIG_PREFIX + "diamond", "nuggetColor", "0x4AEDD1");
-        config.get(Reference.CONFIG_PREFIX + "diamond", "veinHeight", 16);
-        config.get(Reference.CONFIG_PREFIX + "diamond", "veinRate", 3);
-        config.get(Reference.CONFIG_PREFIX + "diamond", "veinSize", 8);
-        config.get(Reference.CONFIG_PREFIX + "emerald", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "emerald", "baseBlock", "emerald_ore");
-        config.get(Reference.CONFIG_PREFIX + "emerald", "oreRenderType", 1);
-        config.get(Reference.CONFIG_PREFIX + "emerald", "nuggetColor", "0x17DD62");
-        config.get(Reference.CONFIG_PREFIX + "gold", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "gold", "baseBlock", "gold_ore");
-        config.get(Reference.CONFIG_PREFIX + "gold", "nuggetColor", "0xFFFF0B");
-        config.get(Reference.CONFIG_PREFIX + "gold", "veinHeight", 32);
-        config.get(Reference.CONFIG_PREFIX + "gold", "veinRate", 3);
-        config.get(Reference.CONFIG_PREFIX + "gold", "veinSize", 16);
-        config.get(Reference.CONFIG_PREFIX + "iron", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "iron", "baseBlock", "iron_ore");
-        config.get(Reference.CONFIG_PREFIX + "iron", "nuggetColor", "0xFFFFFF");
-        config.get(Reference.CONFIG_PREFIX + "iron", "veinHeight", 64);
-        config.get(Reference.CONFIG_PREFIX + "iron", "veinRate", 8);
-        config.get(Reference.CONFIG_PREFIX + "iron", "veinSize", 24);
-        config.get(Reference.CONFIG_PREFIX + "lapis", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "lapis", "baseBlock", "lapis_ore");
-        config.get(Reference.CONFIG_PREFIX + "lapis", "nuggetColor", "0x456ED1");
-        config.get(Reference.CONFIG_PREFIX + "lapis", "veinHeight", 32);
-        config.get(Reference.CONFIG_PREFIX + "lapis", "veinRate", 3);
-        config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 12);
-        config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
-        config.get(Reference.CONFIG_PREFIX + "redstone", "nuggetColor", "0xFF0000");
-        config.get(Reference.CONFIG_PREFIX + "redstone", "isDust", true);
-        config.get(Reference.CONFIG_PREFIX + "redstone", "veinHeight", 16);
-        config.get(Reference.CONFIG_PREFIX + "redstone", "veinRate", 4);
-        config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 16);
-        config.get(Reference.CONFIG_PREFIX + "quartz", "modID", "minecraft");
-        config.get(Reference.CONFIG_PREFIX + "quartz", "baseBlock", "quartz_ore");
-        config.get(Reference.CONFIG_PREFIX + "quartz", "underlyingBlock", "minecraft:netherrack");
-        config.get(Reference.CONFIG_PREFIX + "quartz", "oreRenderType", 2);
-        config.get(Reference.CONFIG_PREFIX + "quartz", "nuggetColor", "0xEAE4DE");
-        config.get(Reference.CONFIG_PREFIX + "quartz", "veinHeight", 128);
-        config.get(Reference.CONFIG_PREFIX + "quartz", "veinRate", 10);
-        config.get(Reference.CONFIG_PREFIX + "quartz", "veinSize", 32);
+        if (config.getBoolean("generateVanillaConfig", Configuration.CATEGORY_GENERAL, true, "Adds all vanilla ores to the config file.")) {
+            config.get(Reference.CONFIG_PREFIX + "coal", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "coal", "baseBlock", "coal_ore");
+            config.get(Reference.CONFIG_PREFIX + "coal", "burnTime", 200);
+            config.get(Reference.CONFIG_PREFIX + "coal", "nuggetColor", "0x363636");
+            config.get(Reference.CONFIG_PREFIX + "coal", "veinHeight", 120);
+            config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 12);
+            config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 32);
+            config.get(Reference.CONFIG_PREFIX + "diamond", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "diamond", "baseBlock", "diamond_ore");
+            config.get(Reference.CONFIG_PREFIX + "diamond", "nuggetColor", "0x4AEDD1");
+            config.get(Reference.CONFIG_PREFIX + "diamond", "veinHeight", 16);
+            config.get(Reference.CONFIG_PREFIX + "diamond", "veinRate", 3);
+            config.get(Reference.CONFIG_PREFIX + "diamond", "veinSize", 8);
+            config.get(Reference.CONFIG_PREFIX + "emerald", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "emerald", "baseBlock", "emerald_ore");
+            config.get(Reference.CONFIG_PREFIX + "emerald", "oreRenderType", 1);
+            config.get(Reference.CONFIG_PREFIX + "emerald", "nuggetColor", "0x17DD62");
+            config.get(Reference.CONFIG_PREFIX + "gold", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "gold", "baseBlock", "gold_ore");
+            config.get(Reference.CONFIG_PREFIX + "gold", "nuggetColor", "0xFFFF0B");
+            config.get(Reference.CONFIG_PREFIX + "gold", "veinHeight", 32);
+            config.get(Reference.CONFIG_PREFIX + "gold", "veinRate", 3);
+            config.get(Reference.CONFIG_PREFIX + "gold", "veinSize", 16);
+            config.get(Reference.CONFIG_PREFIX + "iron", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "iron", "baseBlock", "iron_ore");
+            config.get(Reference.CONFIG_PREFIX + "iron", "nuggetColor", "0xFFFFFF");
+            config.get(Reference.CONFIG_PREFIX + "iron", "veinHeight", 64);
+            config.get(Reference.CONFIG_PREFIX + "iron", "veinRate", 8);
+            config.get(Reference.CONFIG_PREFIX + "iron", "veinSize", 24);
+            config.get(Reference.CONFIG_PREFIX + "lapis", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "lapis", "baseBlock", "lapis_ore");
+            config.get(Reference.CONFIG_PREFIX + "lapis", "nuggetColor", "0x456ED1");
+            config.get(Reference.CONFIG_PREFIX + "lapis", "veinHeight", 32);
+            config.get(Reference.CONFIG_PREFIX + "lapis", "veinRate", 3);
+            config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 12);
+            config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
+            config.get(Reference.CONFIG_PREFIX + "redstone", "nuggetColor", "0xFF0000");
+            config.get(Reference.CONFIG_PREFIX + "redstone", "isDust", true);
+            config.get(Reference.CONFIG_PREFIX + "redstone", "veinHeight", 16);
+            config.get(Reference.CONFIG_PREFIX + "redstone", "veinRate", 4);
+            config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 16);
+            config.get(Reference.CONFIG_PREFIX + "quartz", "modID", "minecraft");
+            config.get(Reference.CONFIG_PREFIX + "quartz", "baseBlock", "quartz_ore");
+            config.get(Reference.CONFIG_PREFIX + "quartz", "underlyingBlock", "minecraft:netherrack");
+            config.get(Reference.CONFIG_PREFIX + "quartz", "oreRenderType", 2);
+            config.get(Reference.CONFIG_PREFIX + "quartz", "nuggetColor", "0xEAE4DE");
+            config.get(Reference.CONFIG_PREFIX + "quartz", "veinHeight", 128);
+            config.get(Reference.CONFIG_PREFIX + "quartz", "veinRate", 10);
+            config.get(Reference.CONFIG_PREFIX + "quartz", "veinSize", 32);
+
+            config.get(Configuration.CATEGORY_GENERAL, "generateVanillaConfig", false, "Adds all vanilla ores to the config file. [default: false]").set(false);
+        }
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {
@@ -134,6 +139,9 @@ public class configHandler {
                         }
                         PoorOre poorOre = new PoorOre(name, modID, baseBlockName, baseBlockMeta, baseBlockTexture, underlyingBlock, underlyingBlockName, oreRenderType, veinRate, veinSize, veinHeight, dimWhiteList, dimBlackList);
                         Nugget nugget = new Nugget(name, poorOre, baseBlockMeta, dust, burnTime, nuggetColor, nuggetRenderType);
+                        if (Reference.CONFIG_ALL_DUSTS && !dust) {
+                            Reference.DUSTS_LIST.add(new Nugget(name, poorOre, baseBlockMeta, true, burnTime, nuggetColor, 0));
+                        }
                         poorOre.setNugget(nugget);
                         Reference.ORES_LIST.add(poorOre);
                         Reference.NUGGETS_LIST.add(nugget);

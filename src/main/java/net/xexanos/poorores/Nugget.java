@@ -33,7 +33,11 @@ public class Nugget extends Item {
 
     public Nugget(String name, PoorOre poorOre, int meta, boolean dust, int burnTime, int nuggetRenderType) {
         super();
-        setName(name + "_nugget");
+        if (dust) {
+            setName(name + "_dustTiny");
+        } else {
+            setName(name + "_nugget");
+        }
         setUnlocalizedName(this.getName());
         setPoorOre(poorOre);
         setMeta(meta);

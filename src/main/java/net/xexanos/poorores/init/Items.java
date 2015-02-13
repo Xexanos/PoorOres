@@ -9,12 +9,18 @@ public class Items {
         for (Nugget nugget : Reference.NUGGETS_LIST) {
             GameRegistry.registerItem(nugget, nugget.getName());
         }
+        for (Nugget dust : Reference.DUSTS_LIST) {
+            GameRegistry.registerItem(dust, dust.getName());
+        }
     }
 
     public static void init() {
         for (Nugget nugget : Reference.NUGGETS_LIST) {
             nugget.registerOreDict();
             nugget.registerSmelting();
+        }
+        for (Nugget dust : Reference.DUSTS_LIST) {
+            dust.registerOreDict();
         }
     }
 

@@ -14,6 +14,7 @@ public class Reference {
 
     public static LinkedList<PoorOre> ORES_LIST = new LinkedList<PoorOre>();
     public static LinkedList<Nugget> NUGGETS_LIST = new LinkedList<Nugget>();
+    public static LinkedList<Nugget> DUSTS_LIST = new LinkedList<Nugget>();
     public static boolean CONFIG_WORLDGEN_COAL = false;
     public static boolean CONFIG_WORLDGEN_DIAMOND = false;
     public static boolean CONFIG_WORLDGEN_EMERALD = false;
@@ -24,4 +25,5 @@ public class Reference {
     public static boolean CONFIG_WORLDGEN_QUARTZ = false;
     public static boolean CONFIG_ADD_CRAFTING = true;
     public static boolean CONFIG_ADD_SMELTING = true;
+    public static boolean CONFIG_ALL_DUSTS = false;
 }

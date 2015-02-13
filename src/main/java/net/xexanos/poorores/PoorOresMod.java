@@ -19,13 +19,13 @@ import java.io.File;
 public class PoorOresMod {
     @Mod.Instance(Reference.MOD_ID)
     public static PoorOresMod instance;
-    File configName;
+    File configFile;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent e) {
-        configName = e.getSuggestedConfigurationFile();
+        configFile = e.getSuggestedConfigurationFile();
 
-        configHandler.preInit(configName);
+        configHandler.preInit(configFile);
 
         Blocks.preInit();
         Items.preInit();
