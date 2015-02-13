@@ -37,13 +37,13 @@ public class configHandler {
         config.get(Reference.CONFIG_PREFIX + "coal", "burnTime", 200);
         config.get(Reference.CONFIG_PREFIX + "coal", "nuggetColor", "0x363636");
         config.get(Reference.CONFIG_PREFIX + "coal", "veinHeight", 120);
-        config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 16);
-        config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 48);
+        config.get(Reference.CONFIG_PREFIX + "coal", "veinRate", 12);
+        config.get(Reference.CONFIG_PREFIX + "coal", "veinSize", 32);
         config.get(Reference.CONFIG_PREFIX + "diamond", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "diamond", "baseBlock", "diamond_ore");
         config.get(Reference.CONFIG_PREFIX + "diamond", "nuggetColor", "0x4AEDD1");
         config.get(Reference.CONFIG_PREFIX + "diamond", "veinHeight", 16);
-        config.get(Reference.CONFIG_PREFIX + "diamond", "veinRate", 4);
+        config.get(Reference.CONFIG_PREFIX + "diamond", "veinRate", 3);
         config.get(Reference.CONFIG_PREFIX + "diamond", "veinSize", 8);
         config.get(Reference.CONFIG_PREFIX + "emerald", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "emerald", "baseBlock", "emerald_ore");
@@ -54,26 +54,26 @@ public class configHandler {
         config.get(Reference.CONFIG_PREFIX + "gold", "nuggetColor", "0xFFFF0B");
         config.get(Reference.CONFIG_PREFIX + "gold", "veinHeight", 32);
         config.get(Reference.CONFIG_PREFIX + "gold", "veinRate", 3);
-        config.get(Reference.CONFIG_PREFIX + "gold", "veinSize", 32);
+        config.get(Reference.CONFIG_PREFIX + "gold", "veinSize", 16);
         config.get(Reference.CONFIG_PREFIX + "iron", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "iron", "baseBlock", "iron_ore");
         config.get(Reference.CONFIG_PREFIX + "iron", "nuggetColor", "0xFFFFFF");
         config.get(Reference.CONFIG_PREFIX + "iron", "veinHeight", 64);
-        config.get(Reference.CONFIG_PREFIX + "iron", "veinRate", 16);
-        config.get(Reference.CONFIG_PREFIX + "iron", "veinSize", 32);
+        config.get(Reference.CONFIG_PREFIX + "iron", "veinRate", 8);
+        config.get(Reference.CONFIG_PREFIX + "iron", "veinSize", 24);
         config.get(Reference.CONFIG_PREFIX + "lapis", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "lapis", "baseBlock", "lapis_ore");
         config.get(Reference.CONFIG_PREFIX + "lapis", "nuggetColor", "0x456ED1");
         config.get(Reference.CONFIG_PREFIX + "lapis", "veinHeight", 32);
-        config.get(Reference.CONFIG_PREFIX + "lapis", "veinRate", 8);
-        config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 32);
+        config.get(Reference.CONFIG_PREFIX + "lapis", "veinRate", 3);
+        config.get(Reference.CONFIG_PREFIX + "lapis", "veinSize", 12);
         config.get(Reference.CONFIG_PREFIX + "redstone", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "redstone", "baseBlock", "redstone_ore");
         config.get(Reference.CONFIG_PREFIX + "redstone", "nuggetColor", "0xFF0000");
         config.get(Reference.CONFIG_PREFIX + "redstone", "isDust", true);
         config.get(Reference.CONFIG_PREFIX + "redstone", "veinHeight", 16);
         config.get(Reference.CONFIG_PREFIX + "redstone", "veinRate", 4);
-        config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 32);
+        config.get(Reference.CONFIG_PREFIX + "redstone", "veinSize", 16);
         config.get(Reference.CONFIG_PREFIX + "quartz", "modID", "minecraft");
         config.get(Reference.CONFIG_PREFIX + "quartz", "baseBlock", "quartz_ore");
         config.get(Reference.CONFIG_PREFIX + "quartz", "underlyingBlock", "minecraft:netherrack");
@@ -81,7 +81,7 @@ public class configHandler {
         config.get(Reference.CONFIG_PREFIX + "quartz", "nuggetColor", "0xEAE4DE");
         config.get(Reference.CONFIG_PREFIX + "quartz", "veinHeight", 128);
         config.get(Reference.CONFIG_PREFIX + "quartz", "veinRate", 10);
-        config.get(Reference.CONFIG_PREFIX + "quartz", "veinSize", 64);
+        config.get(Reference.CONFIG_PREFIX + "quartz", "veinSize", 32);
 
         //read all matching categories and add corresponding blocks and items
         for (String category : config.getCategoryNames()) {
