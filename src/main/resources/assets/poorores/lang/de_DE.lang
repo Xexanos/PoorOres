@@ -13,7 +13,7 @@ poorores.material.lapis=Lapis Lazuli
 poorores.material.redstone=Redstone
 poorores.material.quartz=Netherquarz
 
-poorores.material.apatite=Apatite
+poorores.material.apatite=Apatit
 poorores.material.copper=Kupfer
 poorores.material.tin=Zinn
 
@@ -24,3 +24,31 @@ poorores.material.aluminum=Aluminium
 poorores.material.aluminium=Aluminium
 
 poorores.material.osmium=Osmium
+
+poorores.material.manganese=Mangan
+
+poorores.material.zinc=Zink
+poorores.material.silver=Silber
+poorores.material.platinum=Platin
+
+poorores.material.eximite=Eximite
+poorores.material.meutoite=Meutoite
+poorores.material.desichalkos=Desichalkos
+
+poorores.material.ignatius=Ignatius
+poorores.material.shadowIron=Shadow Iron
+poorores.material.lemurite=Lemurite
+poorores.material.midasium=Midasium
+poorores.material.vyroxeres=Vyroxeres
+poorores.material.ceruclase=Ceruclase
+poorores.material.adluorite=Adluorite
+poorores.material.kalendrite=Kalendrite
+poorores.material.vulcanite=Vulcanite
+poorores.material.sanguinite=Sanguinite
+
+poorores.material.phosphorite=Phosphor
+poorores.material.sulfur=Schwefel
+poorores.material.saltpeter=Saltpeter
+poorores.material.magnesium=Magnesium
+poorores.material.potash=Kalium
+poorores.material.bitumen=Bitumen
