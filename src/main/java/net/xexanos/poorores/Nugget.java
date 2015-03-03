@@ -124,12 +124,11 @@ public class Nugget extends Item {
 
     public ItemStack getIngot() {
         if (ingot == null) {
-            ItemStack ingot = new ItemStack(getPoorOre().getBaseBlock().getItemDropped(getPoorOre().getBaseBlockMeta(), new Random(), 0), 1, getMeta());
-            ItemStack block = new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta());
-            if (ingot.isItemEqual(block)) {
-                this.ingot = FurnaceRecipes.smelting().getSmeltingResult(block);
+            ItemStack smelting = FurnaceRecipes.smelting().getSmeltingResult(new ItemStack(getPoorOre().getBaseBlock(), 1, getMeta()));
+            if (smelting == null) {
+                ingot = new ItemStack(getPoorOre().getBaseBlock().getItemDropped(getPoorOre().getBaseBlockMeta(), new Random(), 0), 1, 0);
             } else {
-                this.ingot = ingot;
+                ingot = smelting;
             }
         }
         return ingot;
